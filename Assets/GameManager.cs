@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Lib.Services;
 using UnityEngine;
 
@@ -25,7 +23,7 @@ public class GameManager : MonoBehaviour
         try
         {
             StreamService streamService = new StreamService();
-            streamService.StreamOut("Rens is cool");
+            streamService.StartStream("Rens is cool");
         }
         catch (Exception e)
         {

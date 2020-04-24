@@ -1,44 +1,64 @@
-﻿using System.Diagnostics;
+﻿using System;
 using System.IO;
+using System.Net.WebSockets;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Lib.Services
 {
     public class StreamService
     {
-        public string PythonPath { get; set; }
-        public string ScriptPath { get; set; }
+        public ClientWebSocket ClientWebSocket { get; set; }
         
         public StreamService()
         {
-            PythonPath = Constants.PYTHONPATH;
-            ScriptPath = Constants.SCRIPTPATH;
+            ClientWebSocket = new ClientWebSocket();
         }
 
-        public void StreamOut(string input)
+        public async void StartStream(string input)
         {
-            stream_read_write(ScriptPath, input);
-        }
-        
-        private void stream_read_write(string scriptPath, string input)
-        {
-            ProcessStartInfo start = new ProcessStartInfo();
-
-            start.FileName = PythonPath;
-            start.Arguments = string.Format("{0} {1}", scriptPath, input);
-            start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-            start.RedirectStandardInput = true;
-            start.CreateNoWindow = true;
-
-            using (Process process = Process.Start(start))
-            using (StreamWriter writer = process.StandardInput)
-            using (StreamReader reader = process.StandardOutput)
+            try
             {
-                UnityEngine.Debug.Log("WRITING: " + input);
-                writer.WriteLine(input);
+                await ClientWebSocket.ConnectAsync(new Uri("ws://"+Constants.AI_IP+":"+Constants.AI_PORT), CancellationToken.None);
+                await Send(ClientWebSocket, input);
+                await Receive(ClientWebSocket);
 
-                UnityEngine.Debug.Log("RECEIVED: "+reader.ReadToEnd());
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ERROR - {ex.Message}");
+            }
+        }
+
+        private static async Task Send(ClientWebSocket socket, string data)
+        {
+            UnityEngine.Debug.Log("SENDING: " + data);
+            await socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(data)), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+
+        private static async Task Receive(ClientWebSocket socket)
+        {
+            var buffer = new ArraySegment<byte>(new byte[2048]);
+            do
+            {
+                WebSocketReceiveResult result;
+                using (var ms = new MemoryStream())
+                {
+                    do
+                    {
+                        result = await socket.ReceiveAsync(buffer, CancellationToken.None);
+                        ms.Write(buffer.Array, buffer.Offset, result.Count);
+                    } while (!result.EndOfMessage);
+            
+                    if (result.MessageType == WebSocketMessageType.Close)
+                        break;
+            
+                    ms.Seek(0, SeekOrigin.Begin);
+                    using (var reader = new StreamReader(ms, Encoding.UTF8))
+                        UnityEngine.Debug.Log("RECEIVED:" + await reader.ReadToEndAsync());
+                }
+            } while (true);
         }
     }
 }
