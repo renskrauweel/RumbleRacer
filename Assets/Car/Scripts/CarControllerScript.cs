@@ -15,10 +15,10 @@ public class CarControllerScript : MonoBehaviour
     float maxBwdSpeed = 1000f;
     float gravity = 9.8f;
     private bool braked = false;
-    private float maxBrakeTorque = 500;
+    private float maxBrakeTorque = 1000;
     private Rigidbody rb;
     public Transform centreofmass;
-    private float maxTorque = 100000;
+    private float maxTorque = 10000;
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -41,8 +41,8 @@ public class CarControllerScript : MonoBehaviour
 
         //changing car direction
         //Here we are changing the steer angle of the front tyres of the car so that we can change the car direction.
-        WheelFL.steerAngle = 30 * (Input.GetAxis("Horizontal"));
-        WheelFR.steerAngle = 30 * Input.GetAxis("Horizontal");
+        WheelFL.steerAngle = 50 * (Input.GetAxis("Horizontal"));
+        WheelFR.steerAngle = 50 * Input.GetAxis("Horizontal");
     }
     void Update()
     {
@@ -57,8 +57,9 @@ public class CarControllerScript : MonoBehaviour
         Vector3 temp = WheelFLtrans.localEulerAngles;
         Vector3 temp1 = WheelFRtrans.localEulerAngles;
         temp.y = WheelFL.steerAngle - (WheelFLtrans.localEulerAngles.z);
+        //temp.x = 90;
         WheelFLtrans.localEulerAngles = temp;
-        temp1.y = WheelFR.steerAngle - WheelFRtrans.localEulerAngles.z;
+        temp1.y = WheelFR.steerAngle - WheelFRtrans.localEulerAngles.z + 180;
         WheelFRtrans.localEulerAngles = temp1;
         eulertest = WheelFLtrans.localEulerAngles;
     }
