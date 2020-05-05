@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool StartAiStream = false;
-    private bool countdown = true;
+    private bool countdown = false;
     
     // Start is called before the first frame update
     void Start()
@@ -24,10 +24,7 @@ public class GameManager : MonoBehaviour
 
     private async Task StartCountdown()
     {
-        GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponent<CarControllerScript>().SetControllable(false));
         GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponentInChildren<CountdownScript>().StartCountdown());
-        await Task.Delay(3000);
-        GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponent<CarControllerScript>().SetControllable(true));
     }
 
     private void DoStartAiStream()

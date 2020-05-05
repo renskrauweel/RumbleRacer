@@ -93,4 +93,9 @@ public class CarControllerScript : MonoBehaviour
     {
         this.controllable = controllable;
     }
+
+    public bool IsControllable()
+    {
+        return controllable;
+    }
 }

@@ -20,26 +20,18 @@ public class CountdownScript : MonoBehaviour
     {
         if (startCountdown)
         {
-            timer -= Time.deltaTime;
-
-            switch (Mathf.Ceil(timer))
+            if (GetComponentInParent<CarControllerScript>().IsControllable())
             {
-                case 3:
-                    countdownText.text = Mathf.Ceil(timer).ToString();
-                    break;
-                case 2:
-                    countdownText.text = Mathf.Ceil(timer).ToString();
-                    break;
-                case 1:
-                    countdownText.text = Mathf.Ceil(timer).ToString();
-                    break;
-                case 0:
-                    countdownText.text = "GO";
-                    break;
-                default:
-                    countdownText.text = "";
-                    startCountdown = false;
-                    break;
+                GetComponentInParent<CarControllerScript>().SetControllable(false);
+            }
+
+            timer -= Time.deltaTime;
+            countdownText.text = Mathf.Ceil(timer).ToString();
+            if (timer < 0)
+            {
+                countdownText.text = "";
+                startCountdown = false;
+                GetComponentInParent<CarControllerScript>().SetControllable(true);
             }
         }
 
