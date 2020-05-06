@@ -14,11 +14,12 @@ public class CarControllerScript : MonoBehaviour
     float maxFwdSpeed = -3000;
     float maxBwdSpeed = 1000f;
     float gravity = 9.8f;
+    private bool controllable = true;
     private bool braked = false;
-    private float maxBrakeTorque = 500;
+    private float maxBrakeTorque = 1000;
     private Rigidbody rb;
     public Transform centreofmass;
-    private float maxTorque = 100000;
+    private float maxTorque = 10000;
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -34,15 +35,19 @@ public class CarControllerScript : MonoBehaviour
             WheelRL.brakeTorque = 0;
             WheelRR.brakeTorque = 0;
         }
-        //speed of car, Car will move as you will provide the input to it.
 
-        WheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
-        WheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+        if (controllable)
+        {
+            //speed of car, Car will move as you will provide the input to it.
 
-        //changing car direction
-        //Here we are changing the steer angle of the front tyres of the car so that we can change the car direction.
-        WheelFL.steerAngle = 30 * (Input.GetAxis("Horizontal"));
-        WheelFR.steerAngle = 30 * Input.GetAxis("Horizontal");
+            WheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
+            WheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
+
+            //changing car direction
+            //Here we are changing the steer angle of the front tyres of the car so that we can change the car direction.
+            WheelFL.steerAngle = 50 * (Input.GetAxis("Horizontal"));
+            WheelFR.steerAngle = 50 * Input.GetAxis("Horizontal");
+        }
     }
     void Update()
     {
@@ -57,8 +62,9 @@ public class CarControllerScript : MonoBehaviour
         Vector3 temp = WheelFLtrans.localEulerAngles;
         Vector3 temp1 = WheelFRtrans.localEulerAngles;
         temp.y = WheelFL.steerAngle - (WheelFLtrans.localEulerAngles.z);
+        //temp.x = 90;
         WheelFLtrans.localEulerAngles = temp;
-        temp1.y = WheelFR.steerAngle - WheelFRtrans.localEulerAngles.z;
+        temp1.y = WheelFR.steerAngle - WheelFRtrans.localEulerAngles.z + 180;
         WheelFRtrans.localEulerAngles = temp1;
         eulertest = WheelFLtrans.localEulerAngles;
     }
@@ -81,5 +87,15 @@ public class CarControllerScript : MonoBehaviour
             WheelRL.motorTorque = 0;
             WheelRR.motorTorque = 0;
         }
+    }
+
+    public void SetControllable(bool controllable)
+    {
+        this.controllable = controllable;
+    }
+
+    public bool IsControllable()
+    {
+        return controllable;
     }
 }
