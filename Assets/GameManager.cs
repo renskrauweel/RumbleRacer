@@ -6,6 +6,7 @@ using Random = System.Random;
 public class GameManager : MonoBehaviour
 {
     public bool StartAiStream = false;
+    public bool MuteBackgroundMusic = false;
     private AudioSource _audioSource;
     public AudioClip BackgroundMusic1;
     public AudioClip BackgroundMusic2;
@@ -16,8 +17,8 @@ public class GameManager : MonoBehaviour
     {
         if (StartAiStream) DoStartAiStream();
         _audioSource = GetComponent<AudioSource>();
-        
-        setRandomBackgroundMusic();
+
+        if (!MuteBackgroundMusic) setRandomBackgroundMusic();
     }
 
     // Update is called once per frame
@@ -45,13 +46,13 @@ public class GameManager : MonoBehaviour
         switch (r.Next(3))
         {
             case 0: 
-                _audioSource.PlayOneShot(BackgroundMusic1, .25f);
+                _audioSource.PlayOneShot(BackgroundMusic1, .1f);
                 break;
             case 1: 
-                _audioSource.PlayOneShot(BackgroundMusic2, .25f);
+                _audioSource.PlayOneShot(BackgroundMusic2, .1f);
                 break;
             case 2: 
-                _audioSource.PlayOneShot(BackgroundMusic3, .25f);
+                _audioSource.PlayOneShot(BackgroundMusic3, .1f);
                 break;
         }
     }
