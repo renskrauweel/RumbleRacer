@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CountdownScript : MonoBehaviour
 {
     public float timer = 3f;
-    public Text countdownText;
+    private UIManagerScript UIManager;
+    private Guid textGuid;
     private bool startCountdown = false;
     // Start is called before the first frame update
     void Start()
     {
-
+        textGuid = new Guid();
+        UIManager = gameObject.GetComponent<UIManagerScript>();
     }
 
     // Update is called once per frame
@@ -20,18 +23,18 @@ public class CountdownScript : MonoBehaviour
     {
         if (startCountdown)
         {
-            if (GetComponentInParent<CarControllerScript>().IsControllable())
+            if (GetComponent<CarControllerScript>().IsControllable())
             {
-                GetComponentInParent<CarControllerScript>().SetControllable(false);
+                GetComponent<CarControllerScript>().SetControllable(false);
             }
 
             timer -= Time.deltaTime;
-            countdownText.text = Mathf.Ceil(timer).ToString();
+            UIManager.DrawText(textGuid, Mathf.Ceil(timer).ToString(), 48, new UnityEngine.Color(245f / 255f, 147f / 255f, 66f / 255f), TextAnchor.MiddleCenter);
             if (timer < 0)
             {
-                countdownText.text = "";
+                UIManager.RemoveText(textGuid);
                 startCountdown = false;
-                GetComponentInParent<CarControllerScript>().SetControllable(true);
+                GetComponent<CarControllerScript>().SetControllable(true);
             }
         }
 
