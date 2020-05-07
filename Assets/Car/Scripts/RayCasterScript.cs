@@ -22,24 +22,31 @@ public class RayCasterScript : MonoBehaviour
         if(ShowRays)
             drawRays();
         if (LogDistance)
-        {
-            Debug.Log(getDebugMessageDistance());
-        }     
+            Debug.Log(getDebugMessageDistance());   
     }  
 
     private List<Ray> getListOfRays()
     {
         List<Ray> listOfRays = new List<Ray>();
-        Vector3 position = transform.position + transform.TransformDirection(Vector3.up);
+        List<Vector3> listOfRotations = new List<Vector3>() 
+        { 
+            Vector3.forward,
+            new Vector3(1, 0, 1),
+            Vector3.right,
+            new Vector3(1, 0, -1),
+            Vector3.back,
+            new Vector3(-1, 0, -1),
+            Vector3.left,
+            new Vector3(-1, 0, 1),
+        };
 
-        listOfRays.Add(new Ray(position, transform.TransformDirection(Vector3.forward)));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(new Vector3(1, 0, 1))));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(Vector3.right)));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(new Vector3(1, 0, -1))));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(Vector3.back)));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(new Vector3(-1, 0, -1))));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(Vector3.left)));
-        listOfRays.Add(new Ray(position, transform.TransformDirection(new Vector3(-1, 0, 1))));
+        Vector3 position = transform.position + transform.TransformDirection(Vector3.up);
+        foreach (var rotation in listOfRotations)
+        {
+            var rotationTemp = transform.TransformDirection(rotation);
+            rotationTemp.y = 0;
+            listOfRays.Add(new Ray(position, rotationTemp));
+        }
 
         return listOfRays;
     }
