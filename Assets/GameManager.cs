@@ -3,16 +3,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Lib.Services;
 using UnityEngine;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public bool countdown = true;
     public bool StartAiStream = false;
-    private bool countdown = false;
+    public bool MuteBackgroundMusic = false;
+    private AudioSource _audioSource;
+    public AudioClip BackgroundMusic1;
+    public AudioClip BackgroundMusic2;
+    public AudioClip BackgroundMusic3;
+
     
     // Start is called before the first frame update
     void Start()
     {
         if (StartAiStream) DoStartAiStream();
+        _audioSource = GetComponent<AudioSource>();
+
+        if (!MuteBackgroundMusic) setRandomBackgroundMusic();
         if (countdown) StartCountdown();
     }
 
@@ -22,9 +32,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private async Task StartCountdown()
+    private void StartCountdown()
     {
-        GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponentInChildren<CountdownScript>().StartCountdown());
+        GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponent<CountdownScript>().StartCountdown());
     }
 
     private void DoStartAiStream()
@@ -37,6 +47,23 @@ public class GameManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e);
+        }
+    }
+
+    private void setRandomBackgroundMusic()
+    {
+        Random r = new Random();
+        switch (r.Next(3))
+        {
+            case 0: 
+                _audioSource.PlayOneShot(BackgroundMusic1, .1f);
+                break;
+            case 1: 
+                _audioSource.PlayOneShot(BackgroundMusic2, .1f);
+                break;
+            case 2: 
+                _audioSource.PlayOneShot(BackgroundMusic3, .1f);
+                break;
         }
     }
 }
