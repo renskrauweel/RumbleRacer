@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: d84164d65df3c40469eff0031c3b655b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CheckpointClip: {fileID: 8300000, guid: 050296e8891257847ae09ea84c9195bc, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
