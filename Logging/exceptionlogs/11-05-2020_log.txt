@@ -1,0 +1,12 @@
+15:39:28 11-5-2020 -- DirectoryNotFoundException: Could not find a part of the path "\\\Logging\\Logging\Logging\replaylogs\ce7d041f-89c4-4c9e-ab71-e00878091386.txt". -- System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options, System.String msgPath, System.Boolean bFromProxy, System.Boolean useLongPath, System.Boolean checkHost) (at <437ba245d8404784b9fbab9b439ac908>:0)
+(wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions,string,bool,bool,bool)
+System.IO.StreamWriter.CreateFile (System.String path, System.Boolean append, System.Boolean checkHost) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.IO.StreamWriter..ctor (System.String path, System.Boolean append, System.Text.Encoding encoding, System.Int32 bufferSize, System.Boolean checkHost) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.IO.StreamWriter..ctor (System.String path, System.Boolean append, System.Text.Encoding encoding, System.Int32 bufferSize) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.IO.StreamWriter..ctor (System.String path, System.Boolean append) (at <437ba245d8404784b9fbab9b439ac908>:0)
+(wrapper remoting-invoke-with-check) System.IO.StreamWriter..ctor(string,bool)
+System.IO.File.AppendText (System.String path) (at <437ba245d8404784b9fbab9b439ac908>:0)
+Lib.Services.LoggingService.LogCarReplay (System.Guid guid, System.Single timeInMs, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation) (at Assets/Lib/Services/LoggingService.cs:28)
+CarReplayLoggerScript.Update () (at Assets/Car/Scripts/CarReplayLoggerScript.cs:26)
+
