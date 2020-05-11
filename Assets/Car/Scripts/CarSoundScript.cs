@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CarSoundScript : MonoBehaviour
 {
@@ -29,5 +30,10 @@ public class CarSoundScript : MonoBehaviour
     private void OnCollisionEnter()
     {
         _audioSource.PlayOneShot(CollisionClip);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Checkpoint")) _audioSource.PlayOneShot(CheckpointClip);
     }
 }
