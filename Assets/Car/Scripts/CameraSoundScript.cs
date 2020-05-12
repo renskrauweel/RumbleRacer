@@ -17,7 +17,7 @@ public class CameraSoundScript : MonoBehaviour
     {
         
     }
-
+    
     public void playSoundClip(AudioClip clip)
     {
         _audioSource.PlayOneShot(clip);

@@ -14,16 +14,25 @@ public class GameManager : MonoBehaviour
     public AudioClip BackgroundMusic1;
     public AudioClip BackgroundMusic2;
     public AudioClip BackgroundMusic3;
+    private LoggingService _loggingService = new LoggingService();
 
-    
     // Start is called before the first frame update
     void Start()
     {
+        // Register exception log callback
+        Application.logMessageReceived += ApplicationOnlogMessageReceived;
+        DontDestroyOnLoad(gameObject);
+        
         if (StartAiStream) DoStartAiStream();
         _audioSource = GetComponent<AudioSource>();
 
         if (!MuteBackgroundMusic) setRandomBackgroundMusic();
         if (countdown) StartCountdown();
+    }
+
+    private void ApplicationOnlogMessageReceived(string condition, string stacktrace, LogType type)
+    {
+        if (type == LogType.Exception) _loggingService.LogException(condition, stacktrace);
     }
 
     // Update is called once per frame
