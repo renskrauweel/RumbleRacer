@@ -8,6 +8,7 @@ TagManager:
   - StartLine
   - FinishLine
   - Checkpoint
+  - Ghost
   layers:
   - Default
   - TransparentFX
