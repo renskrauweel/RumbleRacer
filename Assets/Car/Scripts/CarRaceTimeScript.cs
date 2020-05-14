@@ -43,6 +43,19 @@ public class CarRaceTimeScript : MonoBehaviour
         }
     }
 
+    public void resetScript()
+    {
+        raceTimeStart = new DateTime();
+        raceTimeCurrent = new DateTime();
+        hitStartLine = false;
+        hitFinishLine = false;
+        checkpointsHit = 0;
+        totalCheckPointCount = GameObject.FindGameObjectsWithTag("Checkpoint").Length;
+        checkpointTimes = new List<DateTime>();
+        useTimer = true;
+        timer = new System.Timers.Timer();
+    }
+
     private void RunTimer(object source, ElapsedEventArgs e)
     {
         Debug.Log((DateTime.Now-raceTimeStart).TotalMilliseconds+"MS");
@@ -76,7 +89,6 @@ public class CarRaceTimeScript : MonoBehaviour
     public void SetHitFinishLine(bool hitFinishLine)
     {
         this.hitFinishLine = hitFinishLine;
-
         timer.Enabled = false;
     }
 
@@ -88,11 +100,16 @@ public class CarRaceTimeScript : MonoBehaviour
 
     public bool HasHitAllCheckPoints()
     {
-        return totalCheckPointCount == checkpointsHit;
+        return (totalCheckPointCount == checkpointsHit);
     }
 
     public List<DateTime> GetCheckPointTimes()
     {
         return checkpointTimes;
+    }
+
+    public int GetCheckpointsHit()
+    {
+        return checkpointsHit;
     }
 }
