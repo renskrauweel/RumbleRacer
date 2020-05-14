@@ -21,16 +21,16 @@ public class CheckpointScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Car"))
+        carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();
+        if (carRaceTimeScript != null)
         {
-            carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();
             carRaceTimeScript.AddCheckpointHit();
             Destroy(gameObject);
 
             List<DateTime> checkpointTimes = carRaceTimeScript.GetCheckPointTimes();
             DateTime prev = carRaceTimeScript.GetRaceTimeStart();
         
-            Debug.Log("Checkpoint "+checkpointTimes.Count+": "+(int)(DateTime.Now-prev).TotalMilliseconds+"MS");   
+            Debug.Log("Checkpoint "+checkpointTimes.Count+": "+(int)(DateTime.Now-prev).TotalMilliseconds+"MS");
         }
     }
 }
