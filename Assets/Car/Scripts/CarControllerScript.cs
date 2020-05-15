@@ -49,6 +49,40 @@ public class CarControllerScript : MonoBehaviour
             WheelFR.steerAngle = 50 * Input.GetAxis("Horizontal");
         }
     }
+
+    public void AIController(float vertical, float horizontal, float jump)
+    {
+        if (!braked)
+        {
+            WheelFL.brakeTorque = 0;
+            WheelFR.brakeTorque = 0;
+            WheelRL.brakeTorque = 0;
+            WheelRR.brakeTorque = 0;
+        }
+
+        if (controllable)
+        {
+            //speed of car, Car will move as you will provide the input to it.
+
+            WheelRR.motorTorque = maxTorque * vertical;
+            WheelRL.motorTorque = maxTorque * vertical;
+
+            //changing car direction
+            //Here we are changing the steer angle of the front tyres of the car so that we can change the car direction.
+            WheelFL.steerAngle = 50 * horizontal;
+            WheelFR.steerAngle = 50 * horizontal;
+        }
+
+        if (jump > 0.5)
+        {
+            braked = true;
+        }
+        else
+        {
+            braked = false;
+        }
+    }
+
     void Update()
     {
         HandBrake();

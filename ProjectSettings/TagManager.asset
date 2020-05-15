@@ -9,6 +9,7 @@ TagManager:
   - FinishLine
   - Checkpoint
   - Ghost
+  - Barrier
   layers:
   - Default
   - TransparentFX

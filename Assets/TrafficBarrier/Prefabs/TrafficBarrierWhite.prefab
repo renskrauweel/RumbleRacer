@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6281663986596946157}
   m_Layer: 0
   m_Name: TrafficBarrierWhite
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
