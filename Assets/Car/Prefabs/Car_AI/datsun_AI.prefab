@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736895ec589659c4ebee84c64ce42550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeoutDistance: 100
+  timeoutDistance: 300
   ShowRays: 0
   LogDistance: 0
 --- !u!114 &7357513512157126519
@@ -218,7 +218,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1250
+  MaxStep: 500000
   circuitNumber: 0
   Target: {fileID: 0}
   checkpointPrefab: {fileID: 3457781402568144157, guid: 215db4ef5389dd4498bfa3f9d829786d,
@@ -250,17 +250,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 6a3d3e5c86902b84d8fcdc87c729845d, type: 3}
   m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Car
   TeamId: 0
-  m_UseChildSensors: 1
+  m_UseChildSensors: 0
 --- !u!1 &6369480858831616427
 GameObject:
   m_ObjectHideFlags: 0
