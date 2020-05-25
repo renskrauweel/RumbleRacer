@@ -33,9 +33,9 @@ public class RayCasterScript : MonoBehaviour
             Vector3.forward,
             new Vector3(1, 0, 1),
             Vector3.right,
-            new Vector3(1, 0, -1),
-            Vector3.back,
-            new Vector3(-1, 0, -1),
+            //new Vector3(1, 0, -1),
+            //Vector3.back,
+            //new Vector3(-1, 0, -1),
             Vector3.left,
             new Vector3(-1, 0, 1),
         };
@@ -56,7 +56,7 @@ public class RayCasterScript : MonoBehaviour
         foreach (Ray singleRay in getListOfRays())
         {
             RaycastHit hit;
-            if (Physics.Raycast(singleRay, out hit, timeoutDistance))
+            if (Physics.Raycast(singleRay, out hit, timeoutDistance, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
                 Debug.DrawRay(singleRay.origin, singleRay.direction * hit.distance, Color.green);
             else
                 Debug.DrawRay(singleRay.origin, singleRay.direction * timeoutDistance, Color.green);
