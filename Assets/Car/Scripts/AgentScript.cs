@@ -3,10 +3,11 @@ using UnityEngine;
 using Unity.MLAgents.Sensors;
 using System;
 using System.Linq;
+using Unity.Mathematics;
 
 public class AgentScript : Unity.MLAgents.Agent
 {
-
+    public int circuitNumber;
     public Transform Target;
     private Rigidbody rBody;
     private Collision collision = null;
@@ -14,17 +15,21 @@ public class AgentScript : Unity.MLAgents.Agent
     private int lastCheckpointsHit = 0;
     private List<GameObject> checkpoints;
     private float fastestTime = float.MaxValue;
+    private Vector3 startPos;
+    private quaternion startRot;
 
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
-        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint").ToList();
+        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList();
+        startPos = transform.position;
+        startRot = transform.rotation;
     }
 
     public override void OnEpisodeBegin()
     {
-        transform.position = new Vector3(80,0,-95);
-        transform.rotation = Quaternion.Euler(0, 60, 0);
+        transform.position = startPos;
+        transform.rotation = startRot;
         rBody.velocity = Vector3.zero;
         rBody.angularVelocity = Vector3.zero;
 
@@ -37,21 +42,21 @@ public class AgentScript : Unity.MLAgents.Agent
         // Target and Agent positions
         foreach(var ray in GetComponent<RayCasterScript>().getListOfHitsDistance())
         {
-            sensor.AddObservation(ray / 100);
+            sensor.AddObservation(ray / 300);
         }
         
         // Agent velocity
-        sensor.AddObservation(transform.InverseTransformDirection(rBody.velocity).z / 100);
-        sensor.AddObservation(transform.rotation.eulerAngles / 360f);
+        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5));
+        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).x / 100) / 2 + 0.5));
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        AddReward(-0.005f);
+        AddReward(-0.002f);
 
-        if (transform.InverseTransformDirection(rBody.velocity).z / 100 > 0)
+        if (Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5) > 0.525)
         {
-            AddReward(transform.InverseTransformDirection(rBody.velocity).z / 100);
+            AddReward(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5) / 100);
         }
 
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
@@ -71,12 +76,8 @@ public class AgentScript : Unity.MLAgents.Agent
         {
             if(GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs() < fastestTime)
             {
-                if(fastestTime != float.MaxValue)
-                {
-                    //Debug.LogError(GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs() - fastestTime);
-                    //AddReward(GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs() - fastestTime / 1000);
-                }
                 fastestTime = GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs();
+                Debug.LogError("NEW FASTEST TIME: " + fastestTime);
             }
             AddReward(1f);
             EndEpisode();
