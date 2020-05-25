@@ -36,7 +36,7 @@ public class CarControllerScript : MonoBehaviour
             WheelRR.brakeTorque = 0;
         }
 
-        if (controllable)
+        if (false)
         {
             //speed of car, Car will move as you will provide the input to it.
 

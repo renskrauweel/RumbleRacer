@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,11 +17,12 @@ public class CarRaceTimeScript : MonoBehaviour
     private List<DateTime> checkpointTimes = new List<DateTime>();
     public bool useTimer = true;
     private System.Timers.Timer timer = new System.Timers.Timer();
+    public int circuitNumber;
     
     // Start is called before the first frame update
     void Start()
     {
-        totalCheckPointCount = GameObject.FindGameObjectsWithTag("Checkpoint").Length;
+        totalCheckPointCount = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList().Count;
     }
 
     // Update is called once per frame
@@ -50,7 +52,7 @@ public class CarRaceTimeScript : MonoBehaviour
         hitStartLine = false;
         hitFinishLine = false;
         checkpointsHit = 0;
-        totalCheckPointCount = GameObject.FindGameObjectsWithTag("Checkpoint").Length;
+        totalCheckPointCount = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList().Count;
         checkpointTimes = new List<DateTime>();
         useTimer = true;
         timer = new System.Timers.Timer();
@@ -58,7 +60,7 @@ public class CarRaceTimeScript : MonoBehaviour
 
     private void RunTimer(object source, ElapsedEventArgs e)
     {
-        Debug.Log((DateTime.Now-raceTimeStart).TotalMilliseconds+"MS");
+        //Debug.Log((DateTime.Now-raceTimeStart).TotalMilliseconds+"MS");
     }
 
     public DateTime GetRaceTimeStart()

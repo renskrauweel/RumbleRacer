@@ -6,6 +6,7 @@ public class CheckpointScript : MonoBehaviour
 {
 
     public int order;
+    public int circuitNumber;
     private CarRaceTimeScript carRaceTimeScript;
     private void OnTriggerEnter(Collider other)
     {

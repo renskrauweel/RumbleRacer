@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5967670651407884225}
   m_Layer: 0
   m_Name: TrafficBarrierRed (2)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
 --- !u!1 &832663900520919387
 GameObject:
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1367616071869049188}
   m_Layer: 0
   m_Name: TrafficBarrierRed (1)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +224,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
 --- !u!1 &2370906785943840376
 GameObject:
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 2607963788820101829}
   m_Layer: 0
   m_Name: TrafficBarrierRed (4)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -373,7 +373,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
 --- !u!1 &6203428577819402480
 GameObject:
@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 3497316187238086373}
   m_Layer: 0
   m_Name: TrafficBarrierRed (0)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,7 +486,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
 --- !u!1 &6292363185021385868
 GameObject:
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 3449943347328712090}
   m_Layer: 0
   m_Name: TrafficBarrierRed (3)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -599,7 +599,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
 --- !u!1 &8408067367526151521
 GameObject:
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 1240996848140670080}
   m_Layer: 0
   m_Name: TrafficBarrierRed (5)
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -712,5 +712,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2500017, y: 0.7562501, z: 0.5100003}
+  m_Size: {x: 1.38, y: 0.7562501, z: 0.5100003}
   m_Center: {x: -0.0000010430813, y: 0.37812504, z: 0.0012692213}
