@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using Lib.Replay;
 using Lib.Services;
 using UnityEngine;
 using Random = System.Random;
@@ -10,11 +12,16 @@ public class GameManager : MonoBehaviour
     public bool countdown = true;
     public bool StartAiStream = false;
     public bool MuteBackgroundMusic = false;
+    public string ReplayLogPath = String.Empty;
+    public GameObject Ghost;
     private AudioSource _audioSource;
     public AudioClip BackgroundMusic1;
     public AudioClip BackgroundMusic2;
     public AudioClip BackgroundMusic3;
     private LoggingService _loggingService = new LoggingService();
+    private List<ReplayState> _replayStates = new List<ReplayState>();
+    private List<float> _replayStateTimes = new List<float>();
+    private ReplayService _replayService = new ReplayService();
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +29,13 @@ public class GameManager : MonoBehaviour
         // Register exception log callback
         Application.logMessageReceived += ApplicationOnlogMessageReceived;
         DontDestroyOnLoad(gameObject);
+
+        if (ReplayLogPath.Length > 0) InitReplay();
         
         if (StartAiStream) DoStartAiStream();
         _audioSource = GetComponent<AudioSource>();
 
-        if (!MuteBackgroundMusic) setRandomBackgroundMusic();
+        if (!MuteBackgroundMusic) SetRandomBackgroundMusic();
         if (countdown) StartCountdown();
     }
 
@@ -38,7 +47,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_replayStates.Count > 0) _replayService.UpdateReplayState(Ghost, _replayStates, _replayStateTimes);
     }
 
     private void StartCountdown()
@@ -59,7 +68,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void setRandomBackgroundMusic()
+    private void SetRandomBackgroundMusic()
     {
         Random r = new Random();
         switch (r.Next(3))
@@ -73,6 +82,22 @@ public class GameManager : MonoBehaviour
             case 2: 
                 _audioSource.PlayOneShot(BackgroundMusic3, .1f);
                 break;
+        }
+    }
+
+    private void InitReplay()
+    {
+        try
+        {
+            // Instantiate ghost
+            Ghost = Instantiate(Ghost, new Vector3(0, 0.5f, 0), Quaternion.identity);
+            
+            using (StreamReader sr = new StreamReader(ReplayLogPath))
+                _replayService.InitReplay(sr.ReadToEnd(), _replayStates, _replayStateTimes);
+        }
+        catch (IOException e)
+        {
+            Debug.Log("The file could not be read. Replay is not available");
         }
     }
 }
