@@ -38,14 +38,11 @@ public class FinishLineScript : MonoBehaviour
     {
         if (playername.Length == 0) return;
         
-        // Open file
-        FileStream file = File.Exists(highscoreFileDestination) ? File.OpenWrite(highscoreFileDestination) : File.Create(highscoreFileDestination);
-
-        // Write
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, playername + "-" + endTime +"MS");
+        if (!File.Exists(highscoreFileDestination)) File.Create(highscoreFileDestination);
         
-        // Close
-        file.Close();
+        using (StreamWriter sw = File.AppendText(highscoreFileDestination))
+        {
+            sw.WriteLine(playername + "-" + endTime +"MS");
+        }
     }
 }
