@@ -54,9 +54,11 @@ public class AgentScript : Unity.MLAgents.Agent
     {
         AddReward(-0.002f);
 
-        if (Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5) > 0.525)
+        float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5);
+
+        if (speed > 0.525)
         {
-            AddReward(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5) / 100);
+            AddReward(speed / 500);
         }
 
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
