@@ -9,6 +9,7 @@ using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public int laps = 1;
     public bool countdown = true;
     public bool StartAiStream = false;
     public bool MuteBackgroundMusic = false;
