@@ -28,7 +28,7 @@ public class HighscoresPanelScript : MonoBehaviour
             foreach (string dataRow in data.Split(new string[] { "\r\n" }, StringSplitOptions.None))
             {
                 string[] dataSplitted = dataRow.Split('-');
-                if(dataSplitted.Length == 2) _highscores.Add(new Highscore(dataSplitted[0], int.Parse(dataSplitted[1].Replace("MS", ""))));                
+                if(dataSplitted.Length == 2) _highscores.Add(new Highscore(dataSplitted[0], int.Parse(dataSplitted[1].Replace("Seconds", ""))));                
             }
         }
     }
@@ -40,7 +40,7 @@ public class HighscoresPanelScript : MonoBehaviour
         int z = 0;
         int count = 0;
         
-        List<Highscore> highscoresToUse = _highscores.OrderBy(h => h.TimeMs).ToList();
+        List<Highscore> highscoresToUse = _highscores.OrderBy(h => h.Time).ToList();
         if (highscoresToUse.Count > 39) highscoresToUse = highscoresToUse.GetRange(0, 39);
         
         foreach (Highscore highscore in highscoresToUse)

@@ -26,8 +26,6 @@ public class CarUIScript : MonoBehaviour
         positionGuid = Guid.NewGuid();
         checkpointTimesGuid = Guid.NewGuid();
         speedGuid = Guid.NewGuid();
-
-        
     }
 
     void Update()
@@ -41,16 +39,17 @@ public class CarUIScript : MonoBehaviour
 
     string GetLapTimes()
     {
-        if (GetComponent<CarRaceTimeScript>().GetHitFinishLine())
+        if (GetComponent<CarRaceTimeScript>().GetLastLapTime() > 0)
         {
-            return (GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs()/1000).ToString("0.000");
+            return (GetComponent<CarRaceTimeScript>().GetLastLapTime()).ToString("0.000");
         }
+        else
         return "";
     }
     string GetCheckpointTimes()
     {
         string output = "";
-        float checkpointTime = Math.Abs(Convert.ToSingle((DateTime.Now - GetComponent<CarRaceTimeScript>().GetRaceTimeStart()).TotalMilliseconds) / 1000);
+        float checkpointTime = Math.Abs(GetComponent<CarRaceTimeScript>().GetCurrentLapTime());
         if (GetComponent<CarRaceTimeScript>().GetCheckpointsHit() > checkpointCount)
         {
             checkpointCount = GetComponent<CarRaceTimeScript>().GetCheckpointsHit();

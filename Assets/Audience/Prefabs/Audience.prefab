@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c038617d6b1454f9e0700efeb887da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoalTag: Car
+  GoalTags: Car, CarAI
   minimalDistance: 25
 --- !u!1 &100002
 GameObject:

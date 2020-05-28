@@ -8,7 +8,7 @@ public class CarRaceTimeScript : MonoBehaviour
     private int totalCheckpointCount = 1;
     private int laps = 1;
     private List<DateTime> checkpointTimes = new List<DateTime>();
-    private List<List<DateTime>> LapTimes = new List<List<DateTime>>();
+    private List<List<DateTime>> lapTimes = new List<List<DateTime>>();
     public int circuitNumber;
 
     void Start()
@@ -21,24 +21,48 @@ public class CarRaceTimeScript : MonoBehaviour
     {
         checkpointTimes.Add(DateTime.Now);
     }
+    public void AddCompleteLap()
+    {
+        lapTimes.Add(checkpointTimes);
+        checkpointTimes = new List<DateTime>();
+    }
     public int GetCheckpointsHit()
     {
         return checkpointTimes.Count;
     }
 
-    public bool HasHitAllCheckPoints()
+    public bool GetCompletedLap()
     {
         return (totalCheckpointCount == checkpointTimes.Count);
     }
 
-    public bool GetHitFinishLine()
+    public bool GetCompletedRace()
     {
-        return (totalCheckpointCount < checkpointTimes.Count);
+        return (laps == lapTimes.Count);
     }
 
-    public float GetLastCheckpointTime()
+    public float GetCurrentLapTime()
     {
-        return (float)(checkpointTimes.Last() - checkpointTimes.First()).TotalMilliseconds/1000;
+        if (lapTimes.Count > 0)
+            return (float)(checkpointTimes.Last() - checkpointTimes.First()).TotalMilliseconds / 1000;
+        else
+            return 0;
+    }
+
+    public float GetLastLapTime()
+    {
+        if (lapTimes.Count > 0)
+            return (float)(lapTimes.Last().Last() - lapTimes.Last().First()).TotalMilliseconds / 1000;
+        else
+            return 0;
+    }
+
+    public float GetTotalRaceTime()
+    {
+        if (lapTimes.Count > 0)
+            return (float)(lapTimes.Last().Last() - lapTimes.First().First()).TotalMilliseconds / 1000;
+        else
+            return (float)(checkpointTimes.Last() - checkpointTimes.First()).TotalMilliseconds / 1000;
     }
 
     public int GetTotalCheckpointCount()
@@ -49,5 +73,6 @@ public class CarRaceTimeScript : MonoBehaviour
     public void resetScript()
     {
         checkpointTimes = new List<DateTime>();
+        lapTimes = new List<List<DateTime>>();       
     }
 }

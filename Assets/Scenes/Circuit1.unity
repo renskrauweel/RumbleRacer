@@ -1299,7 +1299,7 @@ Transform:
   - {fileID: 103626084}
   - {fileID: 860537485}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &324409038 stripped
 Transform:
@@ -3031,6 +3031,11 @@ PrefabInstance:
         type: 3}
       propertyPath: countdown
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207668616216348010, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
+        type: 3}
+      propertyPath: laps
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9207668616216348011, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
         type: 3}

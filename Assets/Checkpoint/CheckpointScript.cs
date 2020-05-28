@@ -20,20 +20,26 @@ public class CheckpointScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CarRaceTimeScript carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();      
+        CarRaceTimeScript carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();
 
-        if (order == 0 && carRaceTimeScript.HasHitAllCheckPoints())
+        if (order == 0 && carRaceTimeScript.GetCompletedLap())
         {
             carRaceTimeScript.AddCheckpointHit();
-            SaveHighscore(carRaceTimeScript.GetLastCheckpointTime());
-            Debug.LogWarning("Finished in " + carRaceTimeScript.GetLastCheckpointTime() + " Seconds!");
+            carRaceTimeScript.AddCompleteLap();
+            if (carRaceTimeScript.GetCompletedRace()) {
+                SaveHighscore(carRaceTimeScript.GetTotalRaceTime());
+                Debug.LogWarning("Finished the race in " + carRaceTimeScript.GetTotalRaceTime() + " Seconds!");
+            }
         }
-        else if (carRaceTimeScript.GetCheckpointsHit() == order)
+        if (carRaceTimeScript.GetCheckpointsHit() == order)
         {
             carRaceTimeScript.AddCheckpointHit();
-            setActiveMaterial(false);
-            int nextActive = carRaceTimeScript.GetCheckpointsHit() < carRaceTimeScript.GetTotalCheckpointCount() ? order + 1 : 0;
-            GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);   
+            if (other.tag == "Player")
+            {
+                setActiveMaterial(false);
+                int nextActive = carRaceTimeScript.GetCheckpointsHit() < carRaceTimeScript.GetTotalCheckpointCount() ? order + 1 : 0;
+                GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);
+            }
         }
     }
 
@@ -50,7 +56,7 @@ public class CheckpointScript : MonoBehaviour
 
         using (StreamWriter sw = File.AppendText(highscoreFileDestination))
         {
-            sw.WriteLine(playername + "-" + endTime + "MS");
+            sw.WriteLine(playername + "-" + endTime + "Seconds");
         }
     }
 }
