@@ -50,9 +50,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="UnityEngine">
-      <HintPath>B:\Program Files\2019.3.10f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll</HintPath>
-    </Reference>
+    <PackageReference Include="UnityEngine" />
     <Reference Include="UnityEditor">
       <HintPath>B:\Program Files\2019.3.10f1\Editor\Data\Managed/UnityEditor.dll</HintPath>
     </Reference>
