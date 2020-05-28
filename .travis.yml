@@ -7,11 +7,11 @@ addons:
 language: csharp
 solution: RumbleRacer.sln
 mono: none
-dotnet: 3.1
+dotnet: 3.1.300
 script:
   # Wraps the compilation with the Build Wrapper to generate configuration (used
   # later by the SonarScanner) into the "bw-output" folder
-  - build-wrapper-linux-x86-64 --out-dir bw-output dotnet build RumbleRacer.sln
+  - build-wrapper-linux-x86-64 --out-dir bw-output dotnet restore
   #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet build
   #- dotnet restore
   # And finally run the SonarCloud analysis - read the "sonar-project.properties"
