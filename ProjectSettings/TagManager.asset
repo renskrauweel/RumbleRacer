@@ -11,6 +11,7 @@ TagManager:
   - Ghost
   - Barrier
   - CarBody
+  - CarAI
   layers:
   - Default
   - TransparentFX

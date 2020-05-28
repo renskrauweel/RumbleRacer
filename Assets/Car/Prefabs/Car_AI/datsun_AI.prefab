@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 1106341106425611661}
   m_Layer: 0
   m_Name: datsun_AI
-  m_TagString: Car
+  m_TagString: CarAI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,7 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f153c78297e7d4496096bf69ef3d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useTimer: 1
   circuitNumber: 0
 --- !u!114 &6915125333681756149
 MonoBehaviour:
@@ -255,8 +254,8 @@ MonoBehaviour:
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 5022602860645237092, guid: 6a3d3e5c86902b84d8fcdc87c729845d, type: 3}
-  m_InferenceDevice: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Car
   TeamId: 0
