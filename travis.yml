@@ -4,10 +4,14 @@ addons:
     token:
       secure: "Pitkbm5CKW/BDAey2wJBrd/YhbGYL3JSqkXuVXHOCbuZ5ebqsowywi3tnPBScLydKg7Kh3aEBlG50hrrZPTYuYGkUvrNDdCllXcMVLO1n7Nnr5OZ8T37rbhqis5wmWSPuNTc/wbHEz2PbbKmiau48+zqFqTvkI91SzwSmwnRykLb0nvJsfMdHi9q3fHITfUb5PIQpucnp2iL5Fulp+WTwiPsnC8rLVJ+8JWWNIkBm7YLOe+6MQxlOM4rPHV+KzJnaRSBA6s3UYMA/vxTQfhRDNaroAvZX3cq1xO+2EHy+DKDVcN28ms9OJ/VoHeauGLC7KoTQGRJ5jqrwLQMWktHQX1bqvh2Q/A/LPEttK1m8+aqQT/Je8LNdZs801HG+tDw9xu+GrDgiVRdk9mGJ4Z8QZIqSrYiUrdp1rGkVe/CcYy3gVguMry6ba0h6CNRvvzz+1jEb+Wo5Zs6XKwIaf1qc+PmnLaORrywWrxO4fe7nSKp158QbNRPAUzWfr0S3AEsW/cqCYKB8RRdBZy2jwHQ7L9QkO9D3jjKCwRM0jKS0w62xs35zxm2E0Bu0aYZXg1kaIBcaY9l/mtsu7EPKzH5zv5/ylCl+nbOJOKibFPTPHSlt1lIUA6GcITkE2UjbA0PRbaOJceCPhyPgB/Cmv+uwRBI6wF3MxOVg4rR3bh4MGg="
 
+language: csharp
+mono: none
+dotnet: 2.1.502
 script:
   # Wraps the compilation with the Build Wrapper to generate configuration (used
   # later by the SonarScanner) into the "bw-output" folder
   - build-wrapper-linux-x86-64 --out-dir bw-output# dotnet build RumbleRacer.sln
+  #- dotnet restore
   # And finally run the SonarCloud analysis - read the "sonar-project.properties"
   # file to see the specific configuration
   - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
