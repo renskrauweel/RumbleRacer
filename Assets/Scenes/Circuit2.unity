@@ -121,6 +121,58 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &176822032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176822034}
+  - component: {fileID: 176822033}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &176822033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176822032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878a222a18c33c04b9f7c61107ed9bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laps: 1
+  countdown: 1
+  StartAiStream: 0
+  MuteBackgroundMusic: 0
+  ReplayLogPath: 
+  Ghost: {fileID: 0}
+  BackgroundMusic1: {fileID: 8300000, guid: c59ab914f6de34a4297b42fe8ff42245, type: 3}
+  BackgroundMusic2: {fileID: 8300000, guid: 3ea1d2beb86c671458b1996a40ac32cb, type: 3}
+  BackgroundMusic3: {fileID: 8300000, guid: 3ab5bdf971f6f7f43831ac9949846644, type: 3}
+--- !u!4 &176822034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176822032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -168.65439, y: -404.4523, z: 21.199314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &733992610
 PrefabInstance:
   m_ObjectHideFlags: 0
