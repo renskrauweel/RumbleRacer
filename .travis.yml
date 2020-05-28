@@ -10,9 +10,9 @@ mono: none
 dist: xenial
 dotnet: 3.1
 script:
-  - dotnet clean RumbleRacer.sln
-  - dotnet restore RumbleRacer.sln
-  - dotnet build RumbleRacer.sln
+  - dotnet clean Assembly-CSharp.csproj
+  - dotnet restore Assembly-CSharp.csproj
+  - dotnet build Assembly-CSharp.csproj
 
 #script:
   # Wraps the compilation with the Build Wrapper to generate configuration (used
