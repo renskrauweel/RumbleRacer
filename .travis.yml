@@ -1,16 +1,23 @@
 addons:
   sonarcloud:
     organization: renskrauweel
-    token:
-      secure: PWOJIwsQM29/4dt+6B8uPz/8GJEk6dv0NXYsXecpY+NGCbWeZFHkmZIAzrENc+UdMhFOZN369TNkPYTmLK1y4G7cnSvAIurGB9Ittq8wA6k7aGgrC28vwIfY+mVKG33HwUYE+ttU4YM/73rGbrxr/S4AredapBmFi9FAsbF9WjFZp23gqa7M4p4qfVaEZzdwmoTBX7oTR+t4jwWFhN45hF0DRvtuwYVZ7EohmXgmXMOFrQtyYtu6XXO1M1C8xK+o/RZRxXe3F4C+ksOQNv7bx2RapL9XZxu1iOO7W2GemFaxHoh57dF3JEv6W/HURviswy+My1iI9s/HnU+9/UptCk6pQPBH37pLeDIZ76HERCF70kY80ztYIWhG7EkpafWilLhnWBbYro4RzycZaSNR6EhFythNz0eDNJg+3feTPHdVRFvA4SetacGf81KkD5iUwXjTCG78QT3fqtwdQPwmwrUK1sMSYeK5MHsnV+7kYWKwX9OMbw3j+q0s7HDpDEyGocB1gndzUl8BpQl5WOi3KjU//VEFThhoi/SeigUS93LkdQEkA7dCJd/ffI2IXhg81aUVM1XKPy5R9MPYSk6nZL0H44GwWG2CLSkvQtN+k6hrYN37RH9DZZj2oOJMfy3F1rWGkqnsHOlPGoe1W28e2W7tzs7Fy7MQcjtALMRhyoE=
 solution: RumbleRacer.sln
 language: csharp
 mono: none
 dist: xenial
 dotnet: 3.1
 script:
-- dotnet restore RumbleRacer.sln
-- dotnet build RumbleRacer.sln --no-incremental
-env:
-  global:
-    secure: YLlXY+X1N5izaFHOi4Ow4hczOSNMNzP0VMXBOhi/inx+gPyjFAVjIxfTBcNk6BvNJyuQDpsb6BeHAMBjzyUxuUf3hxpBMaixUiup3X+Y+rISMNGjQ6dzuI8tuM8OvK3GbY+9jrlPrGZS5l8GpNH0i8VuQU/nqtBa+E9xBsvDnTdiNcTAcHr64cMOAJcnGv7hl6RXyecc03WfnIox/5r24M0CkttkVrbXtQNnIg43tJNkUYcp6wmhvE5SnYMewK2snIjhifhnLMwL0GTx5tPz1Jio8GVvo83K0lQQKL10BTADE3ERZ0BRBBvtEhNl5x9UxqqHTVBKeRiXJMvP1jkmCtGbJSokaNipez4L7j9FZKfer/p7c3oW8/z2iRd6hQV3xPO5am6w1XYbI6tp4KkLvePCjcyO3lkD8cTl2ZPO7ypjrgi4Ya/ugjUMdCBZ+SNUVs+bj49WZIEuhiem1wJfOJTdxu4eN+p8HKAEMzgZ5WjLCnHeQioUQFGPvwOpRkTxB1G0Q8ALBgToGVe9TvJT2nd8AfkmkLUTuCz7Ff4BES476zaxfxw0v0XId1PI+EHPAesaLuGYYno+Twt9IpwLGmt/hemg/4p+JdEOltXyEXVFusk1ieHzSGO/yrMNv0SBA7t2A8/mh2H3lYSDkvWe0iRXnbyNySW+i9QQzDSIgHg=
+  #- dotnet restore RumbleRacer.sln
+#  - dotnet clean RumbleRacer.sln
+  #- dotnet build RumbleRacer.sln --no-incremental
+  - build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
+
+#script:
+  # Wraps the compilation with the Build Wrapper to generate configuration (used
+  # later by the SonarScanner) into the "bw-output" folder
+  #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet build RumbleRacer.sln
+  #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet build
+  #- dotnet restore
+  # And finally run the SonarCloud analysis - read the "sonar-project.properties"
+  # file to see the specific configuration
+  - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
