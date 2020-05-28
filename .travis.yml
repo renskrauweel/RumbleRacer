@@ -11,7 +11,8 @@ dist: xenial
 dotnet: 3.1
 script:
   - dotnet restore RumbleRacer.sln
-  - dotnet build RumbleRacer.sln
+  - dotnet clean RumbleRacer.sln
+  - dotnet build RumbleRacer.sln --no-incremental
 
 #script:
   # Wraps the compilation with the Build Wrapper to generate configuration (used
