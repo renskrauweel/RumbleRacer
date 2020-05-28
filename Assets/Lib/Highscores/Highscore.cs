@@ -3,17 +3,17 @@ namespace Lib.Highscores
     public class Highscore
     {
         public string Playername { get; set; }
-        public int TimeMs { get; set; }
+        public int Time { get; set; }
 
-        public Highscore(string playername, int timeMs)
+        public Highscore(string playername, int time)
         {
             Playername = playername;
-            TimeMs = timeMs;
+            Time = time;
         }
 
         public string AsHumanFormat()
         {
-            return Playername + ": " + TimeMs + "MS";
+            return Playername + ": " + Time + "Seconds";
         }
     }
 }

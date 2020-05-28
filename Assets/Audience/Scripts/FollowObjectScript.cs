@@ -1,39 +1,46 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class FollowObjectScript : MonoBehaviour
 {
-    private GameObject[] cars;
-    public string GoalTag = "Car";
-    public float minimalDistance = 25;
+    private List<GameObject> objects = new List<GameObject>();
+    public string GoalTags = "Car, CarAI";
+    public float minimalDistance = 10;
 
     // Start is called before the first frame update
     void Start()
     {
-        cars = GameObject.FindGameObjectsWithTag(GoalTag);
+        string[] tags = GoalTags.Split(new[] { ", " }, StringSplitOptions.None);
+        foreach (var tag in tags)
+        {
+            foreach (var temp in GameObject.FindGameObjectsWithTag(tag)){
+                objects.Add(temp);
+            }
+                
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(cars.Length != 0)
+        if(objects.Count != 0)
         {
-            int closestCar = 0;
-            float closestCarDistance = 0;
+            int closestObject = 0;
+            float closestObjectDistance = 0;
 
-            for (int i = 0; i < cars.Length; i++)
+            for (int i = 0; i < objects.Count; i++)
             {
-                float currentCarDistance = Vector3.Distance(transform.position, cars[i].transform.position);
-                if (currentCarDistance <= closestCarDistance || i == 0)
+                float currentObjectDistance = Vector3.Distance(transform.position, objects[i].transform.position);
+                if (currentObjectDistance <= closestObjectDistance || i == 0)
                 {
-                    closestCar = i;
-                    closestCarDistance = currentCarDistance;
+                    closestObject = i;
+                    closestObjectDistance = currentObjectDistance;
                 }
             }
 
-            transform.LookAt(cars[closestCar].transform);
+            transform.LookAt(objects[closestObject].transform);
         }       
     }
 }

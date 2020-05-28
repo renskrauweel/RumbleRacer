@@ -1,29 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
+using System.IO;
 using UnityEngine;
 
 public class CheckpointScript : MonoBehaviour
 {
-
     public int order;
     public int circuitNumber;
-    private CarRaceTimeScript carRaceTimeScript;
+    public Material Active;
+    public Material Inactive;
+    private string highscoreFileDestination;
+    private string playername;
+
+    private void Start()
+    {
+        highscoreFileDestination = Application.persistentDataPath + "/highscores.dat";
+        playername = PlayerPrefs.GetString("playername");
+        if (order != 0) setActiveMaterial(false);     
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();
-        
-        if (carRaceTimeScript != null)
+        CarRaceTimeScript carRaceTimeScript = other.gameObject.GetComponentInParent<CarRaceTimeScript>();
+
+        if (order == 0 && carRaceTimeScript.GetCompletedLap())
         {
-            if(carRaceTimeScript.GetCheckpointsHit() == order - 1)
-            {
-                carRaceTimeScript.AddCheckpointHit();
-                gameObject.SetActive(false);
-
-                List<DateTime> checkpointTimes = carRaceTimeScript.GetCheckPointTimes();
-                DateTime prev = carRaceTimeScript.GetRaceTimeStart();
-
-                Debug.Log("Checkpoint " + checkpointTimes.Count + ": " + (int)(DateTime.Now - prev).TotalMilliseconds + "MS");
+            carRaceTimeScript.AddCheckpointHit();
+            carRaceTimeScript.AddCompleteLap();
+            if (carRaceTimeScript.GetCompletedRace()) {
+                SaveHighscore(carRaceTimeScript.GetTotalRaceTime());
+                Debug.LogWarning("Finished the race in " + carRaceTimeScript.GetTotalRaceTime() + " Seconds!");
             }
+        }
+        if (carRaceTimeScript.GetCheckpointsHit() == order)
+        {
+            carRaceTimeScript.AddCheckpointHit();
+            if (other.tag == "Player")
+            {
+                setActiveMaterial(false);
+                int nextActive = carRaceTimeScript.GetCheckpointsHit() < carRaceTimeScript.GetTotalCheckpointCount() ? order + 1 : 0;
+                GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);
+            }
+        }
+    }
+
+    private void setActiveMaterial(bool activate)
+    {
+        GetComponent<Renderer>().material = activate ? Active : Inactive;
+    }
+
+    private void SaveHighscore(float endTime)
+    {
+        if (playername.Length == 0) return;
+
+        if (!File.Exists(highscoreFileDestination)) File.Create(highscoreFileDestination);
+
+        using (StreamWriter sw = File.AppendText(highscoreFileDestination))
+        {
+            sw.WriteLine(playername + "-" + endTime + "Seconds");
         }
     }
 }

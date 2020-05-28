@@ -74,11 +74,11 @@ public class AgentScript : Unity.MLAgents.Agent
             AddReward(-0.01f);
         }
 
-        if (GetComponent<CarRaceTimeScript>().GetHitFinishLine())
+        if (GetComponent<CarRaceTimeScript>().GetCompletedRace())
         {
-            if(GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs() < fastestTime)
+            if(GetComponent<CarRaceTimeScript>().GetTotalRaceTime() < fastestTime)
             {
-                fastestTime = GetComponent<CarRaceTimeScript>().GetCurrentRaceTimeMs();
+                fastestTime = GetComponent<CarRaceTimeScript>().GetTotalRaceTime();
                 Debug.LogError("NEW FASTEST TIME: " + fastestTime);
             }
             AddReward(1f);
