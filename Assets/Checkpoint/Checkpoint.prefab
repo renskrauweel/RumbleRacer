@@ -109,6 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 0
   circuitNumber: 0
+  Active: {fileID: 2100000, guid: 404a56c8dae854b4b9b20749acddada8, type: 2}
+  Inactive: {fileID: 2100000, guid: b06940f24646a344cbddf3b5c199e381, type: 2}
 --- !u!82 &686748949388516928
 AudioSource:
   m_ObjectHideFlags: 0
