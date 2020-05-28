@@ -29,15 +29,21 @@ public class RayCasterScript : MonoBehaviour
     {
         List<Ray> listOfRays = new List<Ray>();
         List<Vector3> listOfRotations = new List<Vector3>() 
-        { 
+        {
             Vector3.forward,
             new Vector3(1, 0, 1),
             Vector3.right,
-            //new Vector3(1, 0, -1),
-            //Vector3.back,
-            //new Vector3(-1, 0, -1),
+            new Vector3(1, 0, -1),
+            Vector3.back,
+            new Vector3(-1, 0, -1),
             Vector3.left,
             new Vector3(-1, 0, 1),
+            new Vector3(1, 0, 6),
+            new Vector3(1, 0, 3),
+            new Vector3(1, 0, 2),
+            new Vector3(-1, 0, 6),
+            new Vector3(-1, 0, 3),
+            new Vector3(-1, 0, 2),
         };
 
         Vector3 position = transform.position + transform.TransformDirection(Vector3.up);
