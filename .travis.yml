@@ -10,20 +10,9 @@ mono: none
 dist: xenial
 dotnet: 3.1
 script:
-#  - dotnet restore RumbleRacer.sln
+  - dotnet restore RumbleRacer.sln
 #  - dotnet clean RumbleRacer.sln
-#  - dotnet build RumbleRacer.sln --no-incremental
-  - uses: actions/checkout@v2
-  - name: Setup .NET Core
-    uses: actions/setup-dotnet@v1
-    with:
-      dotnet-version: 3.1.101
-  - name: Install dependencies
-    run: dotnet restore
-  - name: Build
-    run: dotnet build --configuration Release --no-restore
-  - name: Test
-    run: dotnet test --no-restore --verbosity normal
+  - dotnet build RumbleRacer.sln --no-incremental
 
 #script:
   # Wraps the compilation with the Build Wrapper to generate configuration (used
