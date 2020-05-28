@@ -4,31 +4,18 @@ addons:
     token:
       secure: "PWOJIwsQM29/4dt+6B8uPz/8GJEk6dv0NXYsXecpY+NGCbWeZFHkmZIAzrENc+UdMhFOZN369TNkPYTmLK1y4G7cnSvAIurGB9Ittq8wA6k7aGgrC28vwIfY+mVKG33HwUYE+ttU4YM/73rGbrxr/S4AredapBmFi9FAsbF9WjFZp23gqa7M4p4qfVaEZzdwmoTBX7oTR+t4jwWFhN45hF0DRvtuwYVZ7EohmXgmXMOFrQtyYtu6XXO1M1C8xK+o/RZRxXe3F4C+ksOQNv7bx2RapL9XZxu1iOO7W2GemFaxHoh57dF3JEv6W/HURviswy+My1iI9s/HnU+9/UptCk6pQPBH37pLeDIZ76HERCF70kY80ztYIWhG7EkpafWilLhnWBbYro4RzycZaSNR6EhFythNz0eDNJg+3feTPHdVRFvA4SetacGf81KkD5iUwXjTCG78QT3fqtwdQPwmwrUK1sMSYeK5MHsnV+7kYWKwX9OMbw3j+q0s7HDpDEyGocB1gndzUl8BpQl5WOi3KjU//VEFThhoi/SeigUS93LkdQEkA7dCJd/ffI2IXhg81aUVM1XKPy5R9MPYSk6nZL0H44GwWG2CLSkvQtN+k6hrYN37RH9DZZj2oOJMfy3F1rWGkqnsHOlPGoe1W28e2W7tzs7Fy7MQcjtALMRhyoE="
 
-#language: csharp
 solution: RumbleRacer.sln
-#mono: none
-#dotnet: 3.1
-#dist: trusty
-
 language: csharp
 mono: none
 dist: xenial
 dotnet: 3.1
-#install:
-#  - dotnet restore
 script:
   - dotnet clean RumbleRacer.sln
 
 #script:
-  #- curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-  #- sudo apt-add-repository https://packages.microsoft.com/ubuntu/19.10/prod
-  #- sudo apt update --allow-unauthenticated
-  #- sudo apt-get install dotnet-sdk-3.1
-  #- dotnet build
-  
   # Wraps the compilation with the Build Wrapper to generate configuration (used
   # later by the SonarScanner) into the "bw-output" folder
-  #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet restore
+  - build-wrapper-linux-x86-64 --out-dir bw-output dotnet build RumbleRacer.sln
   #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet build
   #- dotnet restore
   # And finally run the SonarCloud analysis - read the "sonar-project.properties"
