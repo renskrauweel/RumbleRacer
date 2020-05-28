@@ -5,18 +5,14 @@ addons:
       secure: "PWOJIwsQM29/4dt+6B8uPz/8GJEk6dv0NXYsXecpY+NGCbWeZFHkmZIAzrENc+UdMhFOZN369TNkPYTmLK1y4G7cnSvAIurGB9Ittq8wA6k7aGgrC28vwIfY+mVKG33HwUYE+ttU4YM/73rGbrxr/S4AredapBmFi9FAsbF9WjFZp23gqa7M4p4qfVaEZzdwmoTBX7oTR+t4jwWFhN45hF0DRvtuwYVZ7EohmXgmXMOFrQtyYtu6XXO1M1C8xK+o/RZRxXe3F4C+ksOQNv7bx2RapL9XZxu1iOO7W2GemFaxHoh57dF3JEv6W/HURviswy+My1iI9s/HnU+9/UptCk6pQPBH37pLeDIZ76HERCF70kY80ztYIWhG7EkpafWilLhnWBbYro4RzycZaSNR6EhFythNz0eDNJg+3feTPHdVRFvA4SetacGf81KkD5iUwXjTCG78QT3fqtwdQPwmwrUK1sMSYeK5MHsnV+7kYWKwX9OMbw3j+q0s7HDpDEyGocB1gndzUl8BpQl5WOi3KjU//VEFThhoi/SeigUS93LkdQEkA7dCJd/ffI2IXhg81aUVM1XKPy5R9MPYSk6nZL0H44GwWG2CLSkvQtN+k6hrYN37RH9DZZj2oOJMfy3F1rWGkqnsHOlPGoe1W28e2W7tzs7Fy7MQcjtALMRhyoE="
 
 language: csharp
-solution: RumbleRacer.sln
+#solution: RumbleRacer.sln
 mono: none
 dotnet: 3.1.300
-sudo: required
-
-before_install:
-  - sudo apt-get install nuget
-install:
-  - dotnet restore RumbleRacer.sln
+dist: trusty
 
 script:
-  - dotnet build RumbleRacer.sln
+  - dotnet restore
+  - dotnet build
   
   # Wraps the compilation with the Build Wrapper to generate configuration (used
   # later by the SonarScanner) into the "bw-output" folder
