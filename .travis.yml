@@ -13,10 +13,10 @@ sudo: required
 before_install:
   - sudo apt-get install nuget
 install:
-  - dotnet restore
+  - dotnet restore RumbleRacer.sln
 
 script:
-  - dotnet build
+  - dotnet build RumbleRacer.sln
   
   # Wraps the compilation with the Build Wrapper to generate configuration (used
   # later by the SonarScanner) into the "bw-output" folder
