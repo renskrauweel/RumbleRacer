@@ -36,7 +36,7 @@ public class CarControllerScript : MonoBehaviour
             WheelRR.brakeTorque = 0;
         }
 
-        if (controllable)
+        if (gameObject.CompareTag("Car"))
         {
             //speed of car, Car will move as you will provide the input to it.
 
@@ -48,6 +48,8 @@ public class CarControllerScript : MonoBehaviour
             WheelFL.steerAngle = 50 * (Input.GetAxis("Horizontal"));
             WheelFR.steerAngle = 50 * Input.GetAxis("Horizontal");
         }
+
+
     }
 
     public void AIController(float vertical, float horizontal, float jump)

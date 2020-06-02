@@ -12,6 +12,7 @@ TagManager:
   - Barrier
   - CarBody
   - CarAI
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
