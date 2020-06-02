@@ -27,9 +27,10 @@ public class CarSoundScript : MonoBehaviour
         _audioSource.pitch = pitch;
     }
 
-    private void OnCollisionEnter()
+    private void OnCollisionEnter(Collision other)
     {
-        _audioSource.PlayOneShot(CollisionClip);
+        if(!other.gameObject.CompareTag("Checkpoint") && !other.gameObject.CompareTag("Surface")) 
+            _audioSource.PlayOneShot(CollisionClip);
     }
 
     public void hitCheckpoint()

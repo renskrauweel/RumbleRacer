@@ -10,7 +10,6 @@ public class CheckpointScript : MonoBehaviour
     public Material Inactive;
     private string highscoreFileDestination;
     private string playername;
-    private bool isActive = true;
 
     private void Start()
     {

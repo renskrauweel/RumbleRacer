@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     private void StartCountdown()
     {
         GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponent<CountdownScript>().StartCountdown());
+        GameObject.FindGameObjectsWithTag("CarAI").ToList().ForEach(car => car.GetComponent<CountdownScript>().StartCountdown());
         _audioSource.PlayOneShot(CountDown, 1);
     }
 

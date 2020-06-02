@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 public class CarControllerScript : MonoBehaviour
 {
     public WheelCollider WheelFL;
@@ -14,56 +16,59 @@ public class CarControllerScript : MonoBehaviour
     float maxFwdSpeed = -3000;
     float maxBwdSpeed = 1000f;
     float gravity = 9.8f;
-    private bool controllable = true;
-    private bool braked = false;
+    private bool controllable;
     private float maxBrakeTorque = 1000;
     private Rigidbody rb;
     public Transform centreofmass;
     private float maxTorque = 10000;
+    private float vertical;
+    private float horizontal;
+    private float jump;
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
         rb.centerOfMass = centreofmass.transform.localPosition;
+        controllable = !GameObject.Find("GameManager").GetComponent<GameManager>().countdown;
     }
 
     void FixedUpdate()
     {
-        if (!braked)
+        if (gameObject.CompareTag("Car"))
         {
-            WheelFL.brakeTorque = 0;
-            WheelFR.brakeTorque = 0;
-            WheelRL.brakeTorque = 0;
-            WheelRR.brakeTorque = 0;
+            this.jump = Convert.ToSingle(Input.GetButton("Jump"));           
+            this.vertical = Input.GetAxis("Vertical");
+            this.horizontal = Input.GetAxis("Horizontal");
+            control();
         }
-
-        if (gameObject.CompareTag("Car") && controllable)
-        {
-            //speed of car, Car will move as you will provide the input to it.
-
-            WheelRR.motorTorque = maxTorque * Input.GetAxis("Vertical");
-            WheelRL.motorTorque = maxTorque * Input.GetAxis("Vertical");
-
-            //changing car direction
-            //Here we are changing the steer angle of the front tyres of the car so that we can change the car direction.
-            WheelFL.steerAngle = 50 * (Input.GetAxis("Horizontal"));
-            WheelFR.steerAngle = 50 * Input.GetAxis("Horizontal");
-        }
-
-
     }
 
     public void AIController(float vertical, float horizontal, float jump)
     {
-        if (!braked)
-        {
-            WheelFL.brakeTorque = 0;
-            WheelFR.brakeTorque = 0;
-            WheelRL.brakeTorque = 0;
-            WheelRR.brakeTorque = 0;
-        }
+        this.jump = jump;
+        this.vertical = vertical;
+        this.horizontal = horizontal;
+        control();
+    }
 
+    private void control()
+    {
         if (controllable)
         {
+            if (jump < 0.5)
+            {
+                WheelFL.brakeTorque = 0;
+                WheelFR.brakeTorque = 0;
+                WheelRL.brakeTorque = 0;
+                WheelRR.brakeTorque = 0;
+            }
+            else
+            {
+                WheelRL.brakeTorque = maxBrakeTorque * 20;
+                WheelRR.brakeTorque = maxBrakeTorque * 20;
+                WheelRL.motorTorque = 0;
+                WheelRR.motorTorque = 0;
+            }
+
             //speed of car, Car will move as you will provide the input to it.
 
             WheelRR.motorTorque = maxTorque * vertical;
@@ -74,21 +79,10 @@ public class CarControllerScript : MonoBehaviour
             WheelFL.steerAngle = 50 * horizontal;
             WheelFR.steerAngle = 50 * horizontal;
         }
-
-        if (jump > 0.5)
-        {
-            braked = true;
-        }
-        else
-        {
-            braked = false;
-        }
     }
 
     void Update()
     {
-        HandBrake();
-
         //for tyre rotate
         WheelFLtrans.Rotate(WheelFL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         WheelFRtrans.Rotate(WheelFR.rpm / 60 * 360 * Time.deltaTime, 0, 0);
@@ -98,40 +92,14 @@ public class CarControllerScript : MonoBehaviour
         Vector3 temp = WheelFLtrans.localEulerAngles;
         Vector3 temp1 = WheelFRtrans.localEulerAngles;
         temp.y = WheelFL.steerAngle - (WheelFLtrans.localEulerAngles.z);
-        //temp.x = 90;
         WheelFLtrans.localEulerAngles = temp;
         temp1.y = WheelFR.steerAngle - WheelFRtrans.localEulerAngles.z + 180;
         WheelFRtrans.localEulerAngles = temp1;
         eulertest = WheelFLtrans.localEulerAngles;
     }
-    void HandBrake()
-    {
-        //Debug.Log("brakes " + braked);
-        if (Input.GetButton("Jump"))
-        {
-            braked = true;
-        }
-        else
-        {
-            braked = false;
-        }
-        if (braked)
-        {
-
-            WheelRL.brakeTorque = maxBrakeTorque * 20;//0000;
-            WheelRR.brakeTorque = maxBrakeTorque * 20;//0000;
-            WheelRL.motorTorque = 0;
-            WheelRR.motorTorque = 0;
-        }
-    }
 
     public void SetControllable(bool controllable)
     {
         this.controllable = controllable;
-    }
-
-    public bool IsControllable()
-    {
-        return controllable;
     }
 }
