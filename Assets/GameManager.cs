@@ -10,6 +10,9 @@ using Random = System.Random;
 public class GameManager : MonoBehaviour
 {
     public int laps = 1;
+    public int OpponentCount = 4;
+    public GameObject AiCarPrefab;
+    public GameObject PlayerCarPrefab;
     public bool countdown = true;
     public bool StartAiStream = false;
     public bool MuteBackgroundMusic = false;
@@ -38,6 +41,9 @@ public class GameManager : MonoBehaviour
 
         if (!MuteBackgroundMusic) SetRandomBackgroundMusic();
         if (countdown) StartCountdown();
+        
+        SetOpponentCount();
+        SpawnCars();
     }
 
     private void ApplicationOnlogMessageReceived(string condition, string stacktrace, LogType type)
@@ -100,5 +106,33 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("The file could not be read. Replay is not available");
         }
+    }
+
+    private void SpawnCars()
+    {
+        List<GameObject> spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint").ToList();
+
+        bool playerAtSpawn = false;
+        int spawnsOccupied = 0;
+        GameObject Car;
+        foreach (GameObject spawnPoint in spawnPoints)
+        {
+            if (!playerAtSpawn && PlayerCarPrefab != null)
+            {
+                Instantiate(PlayerCarPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                playerAtSpawn = true;
+                spawnsOccupied++;
+            } else if (AiCarPrefab != null && spawnsOccupied <= OpponentCount)
+            {
+                Car = Instantiate(AiCarPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                Car.transform.position = spawnPoint.transform.position;
+                spawnsOccupied++;
+            }
+        }
+    }
+
+    private void SetOpponentCount()
+    {
+        OpponentCount = int.TryParse(PlayerPrefs.GetString("opponentcount"), out var number) ? number : 0;
     }
 }
