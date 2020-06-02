@@ -36,7 +36,7 @@ public class CarControllerScript : MonoBehaviour
             WheelRR.brakeTorque = 0;
         }
 
-        if (gameObject.CompareTag("Car"))
+        if (gameObject.CompareTag("Car") && controllable)
         {
             //speed of car, Car will move as you will provide the input to it.
 
