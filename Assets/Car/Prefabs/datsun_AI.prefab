@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 6369480858820755587}
   - component: {fileID: 6369480858820755584}
   - component: {fileID: 6369480858820755586}
+  - component: {fileID: -7635757307804618571}
   - component: {fileID: 7314303750338925395}
   - component: {fileID: 7357513512157126519}
   - component: {fileID: 6915125333681756149}
@@ -174,6 +175,18 @@ MonoBehaviour:
   WheelRRtrans: {fileID: 7789823629610179287}
   eulertest: {x: 0, y: 180, z: 0}
   centreofmass: {fileID: 1709031244270454862}
+--- !u!114 &-7635757307804618571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369480858820755585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c9bae4c44388146b478e7e4618f271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7314303750338925395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +267,7 @@ MonoBehaviour:
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 9c52fc3ea17024e4aa557a502b1cb62b, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Car
@@ -755,6 +768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: datsun240k
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757278184026639506, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3, type: 3}

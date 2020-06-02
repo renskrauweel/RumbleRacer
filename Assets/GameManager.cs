@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public string ReplayLogPath = String.Empty;
     public GameObject Ghost;
     private AudioSource _audioSource;
+    public AudioClip CountDown;
     public AudioClip BackgroundMusic1;
     public AudioClip BackgroundMusic2;
     public AudioClip BackgroundMusic3;
@@ -60,6 +61,8 @@ public class GameManager : MonoBehaviour
     private void StartCountdown()
     {
         GameObject.FindGameObjectsWithTag("Car").ToList().ForEach(car => car.GetComponent<CountdownScript>().StartCountdown());
+        GameObject.FindGameObjectsWithTag("CarAI").ToList().ForEach(car => car.GetComponent<CountdownScript>().StartCountdown());
+        _audioSource.PlayOneShot(CountDown, 1);
     }
 
     private void DoStartAiStream()
