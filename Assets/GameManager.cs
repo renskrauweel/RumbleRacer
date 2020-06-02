@@ -5,7 +5,6 @@ using System.Linq;
 using Lib.Replay;
 using Lib.Services;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (!MuteBackgroundMusic) SetRandomBackgroundMusic();
         if (countdown) StartCountdown();
         
+        SetOpponentCount();
         SpawnCars();
     }
 
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
 
         bool playerAtSpawn = false;
         int spawnsOccupied = 0;
+        GameObject Car;
         foreach (GameObject spawnPoint in spawnPoints)
         {
             if (!playerAtSpawn && PlayerCarPrefab != null)
@@ -123,9 +124,15 @@ public class GameManager : MonoBehaviour
                 spawnsOccupied++;
             } else if (AiCarPrefab != null && spawnsOccupied <= OpponentCount)
             {
-                Instantiate(AiCarPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                Car = Instantiate(AiCarPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                Car.transform.position = spawnPoint.transform.position;
                 spawnsOccupied++;
             }
         }
+    }
+
+    private void SetOpponentCount()
+    {
+        OpponentCount = int.TryParse(PlayerPrefs.GetString("opponentcount"), out var number) ? number : 0;
     }
 }
