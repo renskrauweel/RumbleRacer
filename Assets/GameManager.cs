@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
 
         if (!MuteBackgroundMusic) SetRandomBackgroundMusic();
-        if (countdown) StartCountdown();
-        
+
         SetOpponentCount();
         SpawnCars();
+        
+        if (countdown) StartCountdown();
     }
 
     private void ApplicationOnlogMessageReceived(string condition, string stacktrace, LogType type)
