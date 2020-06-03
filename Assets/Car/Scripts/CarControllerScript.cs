@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 
 public class CarControllerScript : MonoBehaviour
@@ -13,9 +12,6 @@ public class CarControllerScript : MonoBehaviour
     public Transform WheelRLtrans;
     public Transform WheelRRtrans;
     public Vector3 eulertest;
-    float maxFwdSpeed = -3000;
-    float maxBwdSpeed = 1000f;
-    float gravity = 9.8f;
     private bool controllable;
     private float maxBrakeTorque = 1000;
     private Rigidbody rb;

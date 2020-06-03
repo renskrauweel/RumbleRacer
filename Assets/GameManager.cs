@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             using (StreamReader sr = new StreamReader(ReplayLogPath))
                 _replayService.InitReplay(sr.ReadToEnd(), _replayStates, _replayStateTimes);
         }
-        catch (IOException e)
+        catch (IOException)
         {
             Debug.Log("The file could not be read. Replay is not available");
         }
