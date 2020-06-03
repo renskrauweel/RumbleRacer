@@ -24,9 +24,9 @@ public class CarControllerScript : MonoBehaviour
 
     public int shiftRPM = 6000;
     public int idleRPM = 800;
-    private float[] gearratios = { 3.026f, 3.062f, 1.858f, 1.308f, 1f, 0.745f };
-    private float diffRatio = 3.364f;
-    private float circumferenceMeters = 1.9852f; 
+    private float[] gearRatios = { 3.3f, 3.321f, 2.077f, 1.308f, 1f, 0.864f };
+    private float diffRatio = 3.9f;
+    private float circumferenceMeters = 1.9277f;
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -110,22 +110,22 @@ public class CarControllerScript : MonoBehaviour
     {
         float WheelRPM = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z / 60 * 1000 / circumferenceMeters;
         int gear = 0;
+
         if (WheelRPM < 0)
-        {
             gear = 0;
-        }
         else
         {
-            for (int i = 1; i < gearratios.Count(); i++)
+            for (int i = 1; i < gearRatios.Count(); i++)
             {
-                if (WheelRPM * gearratios[i] * diffRatio < shiftRPM)
+                if (WheelRPM * gearRatios[i] * diffRatio < shiftRPM || i == gearRatios.Count() - 1)
                 {
                     gear = i;
                     break;
                 }
             }
         }
-        int engineRPM = Math.Abs(Convert.ToInt32(WheelRPM * gearratios[gear] * diffRatio));
+
+        int engineRPM = Math.Abs(Convert.ToInt32(WheelRPM * gearRatios[gear] * diffRatio));
         return engineRPM > idleRPM ? engineRPM : UnityEngine.Random.Range(idleRPM, idleRPM+30);
     }
 

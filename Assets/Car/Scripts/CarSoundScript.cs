@@ -21,7 +21,6 @@ public class CarSoundScript : MonoBehaviour
     void Update()
     {
         float pitch = (float)carControllerScript.GetEngineRPM() / rpmDivider;
-        Debug.Log(pitch);
         audioSource.pitch = pitch;
     }
 
