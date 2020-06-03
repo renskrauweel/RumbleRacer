@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Numerics;
 using Unity.Mathematics;
+using System.Text.RegularExpressions;
 using Vector3 = UnityEngine.Vector3;
 
 public class AgentScript : Unity.MLAgents.Agent
