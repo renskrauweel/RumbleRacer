@@ -21,7 +21,8 @@ public class PlayMenuScript : MonoBehaviour
         var dir = Environment.CurrentDirectory + "\\Assets\\Scenes";
         var excludes = new List<string>
         {
-            "MainMenu"
+            "MainMenu",
+            "AITraining"
         };
 
         return Directory.GetFiles(dir, "*.unity").Select(Path.GetFileName).ToArray()
@@ -44,6 +45,7 @@ public class PlayMenuScript : MonoBehaviour
             button.GetComponent<RectTransform>().localPosition = new Vector3(x,y,z);
             button.onClick.AddListener(() =>
             {
+                PlayerPrefs.SetString("currentcircuit", scene);
                 SceneManager.LoadScene("Scenes/"+scene);
             });
 

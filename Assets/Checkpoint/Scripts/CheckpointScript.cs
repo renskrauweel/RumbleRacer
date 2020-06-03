@@ -10,11 +10,13 @@ public class CheckpointScript : MonoBehaviour
     public Material Inactive;
     private string highscoreFileDestination;
     private string playername;
+    private string currentcircuit;
 
     private void Start()
     {
         highscoreFileDestination = Application.persistentDataPath + "/highscores.dat";
         playername = PlayerPrefs.GetString("playername");
+        currentcircuit = PlayerPrefs.GetString("currentcircuit");
         if (order != 0) setActiveMaterial(false);     
     }
 
@@ -26,7 +28,7 @@ public class CheckpointScript : MonoBehaviour
         {
             carRaceTimeScript.AddCheckpointHit();
             carRaceTimeScript.AddCompleteLap();
-            if (carRaceTimeScript.GetCompletedRace()) {
+            if (carRaceTimeScript.GetCompletedRace() && other.CompareTag("Player")) {
                 SaveHighscore(carRaceTimeScript.GetTotalRaceTime());
                 Debug.LogWarning("Finished the race in " + carRaceTimeScript.GetTotalRaceTime() + " Seconds!");
             }
@@ -34,7 +36,7 @@ public class CheckpointScript : MonoBehaviour
         if (carRaceTimeScript.GetCheckpointsHit() == order)
         {
             carRaceTimeScript.AddCheckpointHit();
-            if (other.tag == "Player")
+            if (other.CompareTag("Player"))
             {
                 other.GetComponentInParent<CarSoundScript>().hitCheckpoint();
                 setActiveMaterial(false);
@@ -51,13 +53,13 @@ public class CheckpointScript : MonoBehaviour
 
     private void SaveHighscore(float endTime)
     {
-        if (playername.Length == 0) return;
+        if (playername.Length == 0 || currentcircuit.Length == 0) return;
 
         if (!File.Exists(highscoreFileDestination)) File.Create(highscoreFileDestination);
 
         using (StreamWriter sw = File.AppendText(highscoreFileDestination))
         {
-            sw.WriteLine(playername + "-" + endTime + "Seconds");
+            sw.WriteLine(currentcircuit + "-" + playername + "-" + endTime + "Seconds");
         }
     }
 }
