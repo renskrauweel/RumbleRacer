@@ -15,6 +15,7 @@ TagManager:
   - Circuit
   - SpawnPoint
   - Surface
+  - Grass
   layers:
   - Default
   - TransparentFX
