@@ -31,9 +31,9 @@ public class CarControllerScript : MonoBehaviour
     {
         if (gameObject.CompareTag("Car"))
         {
-            this.jump = Convert.ToSingle(Input.GetButton("Jump"));           
-            this.vertical = Input.GetAxis("Vertical");
-            this.horizontal = Input.GetAxis("Horizontal");
+            jump = Convert.ToSingle(Input.GetButton("Jump"));           
+            vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxis("Horizontal");
             control();
         }
     }
