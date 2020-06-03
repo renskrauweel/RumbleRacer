@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 
 public class CarControllerScript : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class CarControllerScript : MonoBehaviour
     private float vertical;
     private float horizontal;
     private float jump;
+
+    public int shiftRPM = 6000;
+    public int idleRPM = 800;
+    private float[] gearratios = { 3.026f, 3.062f, 1.858f, 1.308f, 1f, 0.745f };
+    private float diffRatio = 3.364f;
+    private float circumferenceMeters = 1.9852f; 
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -83,7 +90,7 @@ public class CarControllerScript : MonoBehaviour
         WheelFLtrans.Rotate(WheelFL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         WheelFRtrans.Rotate(WheelFR.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         WheelRLtrans.Rotate(WheelRL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
-        WheelRRtrans.Rotate(WheelRL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+        WheelRRtrans.Rotate(WheelRR.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         //changing tyre direction
         Vector3 temp = WheelFLtrans.localEulerAngles;
         Vector3 temp1 = WheelFRtrans.localEulerAngles;
@@ -97,5 +104,33 @@ public class CarControllerScript : MonoBehaviour
     public void SetControllable(bool controllable)
     {
         this.controllable = controllable;
+    }
+
+    public int GetEngineRPM()
+    {
+        float WheelRPM = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z / 60 * 1000 / circumferenceMeters;
+        int gear = 0;
+        if (WheelRPM < 0)
+        {
+            gear = 0;
+        }
+        else
+        {
+            for (int i = 1; i < gearratios.Count(); i++)
+            {
+                if (WheelRPM * gearratios[i] * diffRatio < shiftRPM)
+                {
+                    gear = i;
+                    break;
+                }
+            }
+        }
+        int engineRPM = Math.Abs(Convert.ToInt32(WheelRPM * gearratios[gear] * diffRatio));
+        return engineRPM > idleRPM ? engineRPM : UnityEngine.Random.Range(idleRPM, idleRPM+30);
+    }
+
+    public int getSpeed()
+    {
+        return Convert.ToInt32(transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z);
     }
 }
