@@ -33,18 +33,13 @@ public class CarUIScript : MonoBehaviour
         UIManager.DrawText(speedGuid, getSpeed().ToString() + " km/h", 24, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.045f));
         UIManager.DrawText(checkpointTimesGuid, GetCheckpointTimes(), 24, new Color(0/255f, 145/255f, 234/255f), TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.04f));
         UIManager.DrawText(lapTimeGuid, GetLapTimes(), 30, new Color(76/255f, 175/255f, 80/255f), TextAnchor.UpperRight);
-        UIManager.DrawText(positionGuid, GetPosistion(), 32, Color.red, TextAnchor.LowerLeft);
+        UIManager.DrawText(positionGuid, GetPosition(), 32, Color.red, TextAnchor.LowerLeft);
         UIManager.DrawText(rpmGuid, getRPM().ToString() + " RPM", 18, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight);
     }
 
     string GetLapTimes()
     {
-        if (GetComponent<CarRaceTimeScript>().GetLastLapTime() > 0)
-        {
-            return (GetComponent<CarRaceTimeScript>().GetLastLapTime()).ToString("0.000");
-        }
-        else
-        return "";
+        return GetComponent<CarRaceTimeScript>().GetLastLapTime() > 0 ? (GetComponent<CarRaceTimeScript>().GetLastLapTime()).ToString("0.000") : "";
     }
     string GetCheckpointTimes()
     {
@@ -65,26 +60,17 @@ public class CarUIScript : MonoBehaviour
         return output;
     }
 
-    float getSpeed()
+    int getSpeed()
     {
-        return Math.Abs(Convert.ToSingle(Math.Round(transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z)));
+        return GetComponent<CarControllerScript>().getSpeed();
     }
 
     int getRPM()
     {
-        int rpm = Convert.ToInt32(GetComponent<CarControllerScript>().WheelRR.rpm+
-        GetComponent<CarControllerScript>().WheelRR.rpm+
-        GetComponent<CarControllerScript>().WheelRR.rpm+
-        GetComponent<CarControllerScript>().WheelRR.rpm) / 4;
-        averageRPM.Add(rpm);
-        if (averageRPM.Count > 150)
-        {
-            averageRPM.RemoveAt(0);
-        }
-        return Convert.ToInt32(Math.Abs(averageRPM.Average()));
+        return GetComponent<CarControllerScript>().GetEngineRPM();
     }
 
-    string GetPosistion()
+    string GetPosition()
     {
         return "#1";
     }
