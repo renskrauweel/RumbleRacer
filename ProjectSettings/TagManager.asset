@@ -12,6 +12,7 @@ TagManager:
   - Barrier
   - CarBody
   - CarAI
+  - Circuit
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ using Unity.MLAgents.Sensors;
 using System;
 using System.Linq;
 using Unity.Mathematics;
+using System.Text.RegularExpressions;
 
 public class AgentScript : Unity.MLAgents.Agent
 {

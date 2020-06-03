@@ -756,6 +756,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: datsun240k
       objectReference: {fileID: 0}
+    - target: {fileID: 8757278184026639506, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3, type: 3}
 --- !u!4 &1709031244270454862 stripped
