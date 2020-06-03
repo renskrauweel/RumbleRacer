@@ -38,6 +38,7 @@ public class CheckpointScript : MonoBehaviour
             carRaceTimeScript.AddCheckpointHit();
             if (other.tag == "Player")
             {
+                other.GetComponentInParent<CarSoundScript>().hitCheckpoint();
                 setActiveMaterial(false);
                 int nextActive = carRaceTimeScript.GetCheckpointsHit() < carRaceTimeScript.GetTotalCheckpointCount() ? order + 1 : 0;
                 GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);

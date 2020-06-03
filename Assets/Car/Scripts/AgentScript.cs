@@ -3,8 +3,10 @@ using UnityEngine;
 using Unity.MLAgents.Sensors;
 using System;
 using System.Linq;
+using System.Numerics;
 using Unity.Mathematics;
 using System.Text.RegularExpressions;
+using Vector3 = UnityEngine.Vector3;
 
 public class AgentScript : Unity.MLAgents.Agent
 {
@@ -18,17 +20,26 @@ public class AgentScript : Unity.MLAgents.Agent
     private float fastestTime = float.MaxValue;
     private Vector3 startPos;
     private quaternion startRot;
+    private bool isStarted;
 
     void Start()
     {
-        rBody = GetComponent<Rigidbody>();
-        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList();
-        startPos = transform.position;
-        startRot = transform.rotation;
+        if (!isStarted)
+        {
+            rBody = GetComponent<Rigidbody>();
+            checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList();
+            startPos = transform.position;
+            startRot = transform.rotation;
+        }
+        isStarted = true;
     }
 
     public override void OnEpisodeBegin()
     {
+        if (!isStarted) Start();
+        
+        startPos = transform.position;
+        startRot = transform.rotation;
         transform.position = startPos;
         transform.rotation = startRot;
         rBody.velocity = Vector3.zero;
@@ -36,6 +47,7 @@ public class AgentScript : Unity.MLAgents.Agent
 
         checkpoints.ForEach(x => x.SetActive(true));
         GetComponent<CarRaceTimeScript>().resetScript();
+        
     }
 
     public override void CollectObservations(VectorSensor sensor)

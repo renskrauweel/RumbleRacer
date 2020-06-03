@@ -74,11 +74,9 @@
     <Compile Include="Assets\Car\Scripts\CarSoundScript.cs" />
     <Compile Include="Assets\Car\Scripts\CarUIScript.cs" />
     <Compile Include="Assets\Car\Scripts\CountdownScript.cs" />
-    <Compile Include="Assets\Car\Scripts\OldScripts\CarControl.cs" />
-    <Compile Include="Assets\Car\Scripts\OldScripts\SimpleCarController.cs" />
     <Compile Include="Assets\Car\Scripts\RayCasterScript.cs" />
     <Compile Include="Assets\Car\Scripts\UIManagerScript.cs" />
-    <Compile Include="Assets\Checkpoint\CheckpointScript.cs" />
+    <Compile Include="Assets\Checkpoint\Scripts\CheckpointScript.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Lib\Constants.cs" />
     <Compile Include="Assets\Lib\Highscores\Highscore.cs" />
@@ -89,69 +87,70 @@
     <Compile Include="Assets\MainMenu\Scripts\ExitOnClickScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\HighscoresPanelScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\LoadSceneOnClickScript.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\SaveOpponentCountScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\SavePlayerNameScript.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Barracuda.MacBLAS">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.MacBLAS.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.MacBLAS.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Barracuda.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Barracuda">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Barracuda.iOSBLAS">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.iOSBLAS.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.iOSBLAS.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ML-Agents.CommunicatorObjects">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.CommunicatorObjects.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.CommunicatorObjects.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Barracuda.BurstBLAS">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.BurstBLAS.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Barracuda.BurstBLAS.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ML-Agents.Editor">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.Editor.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ML-Agents">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/Unity.ML-Agents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -331,22 +330,22 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.barracuda@0.7.1-preview/Barracuda/Runtime/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.barracuda@0.7.1-preview/Barracuda/Runtime/Plugins/ProtoBuffer/Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.burst@1.2.3/Unity.Burst.Unsafe.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.burst@1.2.3/Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Abstractions">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/System.IO.Abstractions.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/System.IO.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Abstractions.TestingHelpers">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/System.IO.Abstractions.TestingHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Grpc.Core">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/ProtoBuffer/Grpc.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive.Async">
-      <HintPath>C:/Users/Kevin Haakma/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
+      <HintPath>C:/Users/richa/Documents/GitHub/RumbleRacer/Library/PackageCache/com.unity.ml-agents@1.0.2-preview/Plugins/ProtoBuffer/System.Interactive.Async.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -27,18 +27,15 @@ public class CarSoundScript : MonoBehaviour
         _audioSource.pitch = pitch;
     }
 
-    private void OnCollisionEnter()
+    private void OnCollisionEnter(Collision other)
     {
-        _audioSource.PlayOneShot(CollisionClip);
+        if(!other.gameObject.CompareTag("Checkpoint") && !other.gameObject.CompareTag("Surface")) 
+            _audioSource.PlayOneShot(CollisionClip);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void hitCheckpoint()
     {
-        if (other.CompareTag("Checkpoint"))
-        {
-            // Play checkpoint clip on camera
-            CameraSoundScript cameraSoundScript = gameObject.GetComponentInChildren<CameraSoundScript>();
-            cameraSoundScript.playSoundClip(CheckpointClip);
-        }
+        CameraSoundScript cameraSoundScript = gameObject.GetComponentInChildren<CameraSoundScript>();
+        cameraSoundScript.playSoundClip(CheckpointClip);
     }
 }

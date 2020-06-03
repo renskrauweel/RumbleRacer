@@ -44,7 +44,7 @@ public class CarRaceTimeScript : MonoBehaviour
 
     public float GetCurrentLapTime()
     {
-        if (lapTimes.Count > 0)
+        if (checkpointTimes.Count > 0)
             return (float)(checkpointTimes.Last() - checkpointTimes.First()).TotalMilliseconds / 1000;
         else
             return 0;

@@ -13,6 +13,8 @@ TagManager:
   - CarBody
   - CarAI
   - Circuit
+  - SpawnPoint
+  - Surface
   layers:
   - Default
   - TransparentFX
