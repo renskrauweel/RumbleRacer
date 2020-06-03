@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
+﻿using UnityEngine;
 
 public class CarColorScript : MonoBehaviour
 {

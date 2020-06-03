@@ -12,9 +12,11 @@ TagManager:
   - Barrier
   - CarBody
   - CarAI
+  - Circuit
   - SpawnPoint
   - Surface
   - TxtHighscore
+  - Grass
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.IO;
 using UnityEngine;
+using System.Text.RegularExpressions;
+using System;
 
 public class CheckpointScript : MonoBehaviour
 {
@@ -41,7 +43,7 @@ public class CheckpointScript : MonoBehaviour
                 other.GetComponentInParent<CarSoundScript>().hitCheckpoint();
                 setActiveMaterial(false);
                 int nextActive = carRaceTimeScript.GetCheckpointsHit() < carRaceTimeScript.GetTotalCheckpointCount() ? order + 1 : 0;
-                GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);
+                GameObject.FindGameObjectsWithTag("Checkpoint").Where(x => x.GetComponent<CheckpointScript>().order == nextActive && x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).First().GetComponent<CheckpointScript>().setActiveMaterial(true);
             }
         }
     }
