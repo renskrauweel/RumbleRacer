@@ -11,10 +11,10 @@ namespace Lib.Services
         
         public void LogException(string condition, string stacktrace)
         {
-            string logMessage = String.Format("{0} -- {1}", condition, stacktrace);
+            if (!Directory.Exists(exceptionLogDir)) Directory.CreateDirectory(exceptionLogDir);
             using (StreamWriter sw = File.AppendText(exceptionLogDir+DateTime.Now.ToString("dd-MM-yyyy")+"_log.txt"))
             {
-                sw.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToShortDateString()} -- {logMessage}");
+                sw.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToShortDateString()} -- {String.Format("{0} -- {1}", condition, stacktrace)}");
             }
         }
 

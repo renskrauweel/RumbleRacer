@@ -9,15 +9,15 @@ public class CarReplayLoggerScript : MonoBehaviour
     private Guid _carReplayGuid;
     public bool UseLogging = true;
     
-    // Start is called before the first frame update
     void Start()
     {
         _carControllerScript = GetComponent<CarControllerScript>();
         _loggingService = new LoggingService();
         _carReplayGuid = _loggingService.GetCarReplayGuid();
+        
+        UseLogging = (PlayerPrefs.GetInt("createghost") == 1);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (UseLogging)
