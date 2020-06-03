@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         Application.logMessageReceived += ApplicationOnlogMessageReceived;
         DontDestroyOnLoad(gameObject);
 
-        if (ReplayLogPath.Length > 0) InitReplay();
+        InitReplayIfGhostfileGiven();
         
         if (StartAiStream) DoStartAiStream();
         _audioSource = GetComponent<AudioSource>();
@@ -96,8 +96,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void InitReplay()
+    private void InitReplayIfGhostfileGiven()
     {
+        string ghostfile = PlayerPrefs.GetString("ghostfile");
+        if (ghostfile.Length > 0) ReplayLogPath = ghostfile;
+        if (ReplayLogPath.Length <= 0) return;
+        
         try
         {
             // Instantiate ghost
