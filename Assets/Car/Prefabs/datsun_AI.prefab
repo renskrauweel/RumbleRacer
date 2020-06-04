@@ -175,6 +175,8 @@ MonoBehaviour:
   WheelRRtrans: {fileID: 7789823629610179287}
   eulertest: {x: 0, y: 180, z: 0}
   centreofmass: {fileID: 1709031244270454862}
+  shiftRPM: 6000
+  idleRPM: 800
 --- !u!114 &-7635757307804618571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +269,7 @@ MonoBehaviour:
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 5022602860645237092, guid: 9c52fc3ea17024e4aa557a502b1cb62b, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 3d845de6677f4224cb28699445e2a257, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Car
