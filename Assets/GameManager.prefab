@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laps: 1
+  OpponentCount: 4
+  AiCarPrefab: {fileID: 0}
+  PlayerCarPrefab: {fileID: 0}
   countdown: 1
   StartAiStream: 0
   MuteBackgroundMusic: 0
