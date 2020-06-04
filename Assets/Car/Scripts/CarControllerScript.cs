@@ -131,6 +131,6 @@ public class CarControllerScript : MonoBehaviour
 
     public int getSpeed()
     {
-        return Convert.ToInt32(transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z);
+        return Math.Abs(Convert.ToInt32(transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z));
     }
 }
