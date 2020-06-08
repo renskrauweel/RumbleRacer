@@ -9,13 +9,15 @@ using UnityEngine.UI;
 public class HighscoresPanelScript : MonoBehaviour
 {
     private List<Highscore> _highscores;
+    public Dropdown _dropdownCircuits;
+    private readonly string _highscoresTag = "TxtHighscore";
 
     void Start()
     {
         _highscores = new List<Highscore>();
-        
+
         LoadHighscores();
-        PrintHighscores();
+        PrintHighscores(_dropdownCircuits.options[_dropdownCircuits.value].text);
     }
 
     private void LoadHighscores()
@@ -28,24 +30,29 @@ public class HighscoresPanelScript : MonoBehaviour
             foreach (string dataRow in data.Split(new string[] { "\r\n" }, StringSplitOptions.None))
             {
                 string[] dataSplitted = dataRow.Split('-');
-                if(dataSplitted.Length == 2) _highscores.Add(new Highscore(dataSplitted[0], int.Parse(dataSplitted[1].Replace("Seconds", ""))));                
+                if(dataSplitted.Length == 3) _highscores.Add(new Highscore(dataSplitted[0], 
+                    dataSplitted[1], Math.Round(double.Parse(dataSplitted[2]
+                        .Replace("Seconds", "")), 3, MidpointRounding.ToEven)));
             }
         }
     }
 
-    private void PrintHighscores()
+    private void PrintHighscores(string circuitName)
     {
+        ClearHighScores();
+        
         int x = -600;
         int y = 300;
         int z = 0;
         int count = 0;
         
-        List<Highscore> highscoresToUse = _highscores.OrderBy(h => h.Time).ToList();
+        List<Highscore> highscoresToUse = _highscores.OrderBy(h => h.Time).Where(h => h.Circuit == circuitName).ToList();
         if (highscoresToUse.Count > 39) highscoresToUse = highscoresToUse.GetRange(0, 39);
         
         foreach (Highscore highscore in highscoresToUse)
         {
             GameObject newText = new GameObject("TxtHighscore", typeof(RectTransform));
+            newText.tag = _highscoresTag;
             Text textComponent = newText.AddComponent<Text>();
             textComponent.text = count+1 + ". " + highscore.AsHumanFormat();
             textComponent.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
@@ -71,5 +78,15 @@ public class HighscoresPanelScript : MonoBehaviour
                 y = 300;
             }
         }
+    }
+
+    private void ClearHighScores()
+    {
+        foreach (GameObject o in GameObject.FindGameObjectsWithTag(_highscoresTag)) Destroy(o);
+    }
+
+    public void OnValueChanged()
+    {
+        PrintHighscores(_dropdownCircuits.options[_dropdownCircuits.value].text);
     }
 }

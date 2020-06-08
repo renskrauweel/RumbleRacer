@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
+using System.Linq;
 
 public class CarControllerScript : MonoBehaviour
 {
@@ -13,9 +13,6 @@ public class CarControllerScript : MonoBehaviour
     public Transform WheelRLtrans;
     public Transform WheelRRtrans;
     public Vector3 eulertest;
-    float maxFwdSpeed = -3000;
-    float maxBwdSpeed = 1000f;
-    float gravity = 9.8f;
     private bool controllable;
     private float maxBrakeTorque = 1000;
     private Rigidbody rb;
@@ -24,6 +21,12 @@ public class CarControllerScript : MonoBehaviour
     private float vertical;
     private float horizontal;
     private float jump;
+
+    public int shiftRPM = 6000;
+    public int idleRPM = 800;
+    private float[] gearRatios = { 3.3f, 3.321f, 2.077f, 1.308f, 1f, 0.864f };
+    private float diffRatio = 3.9f;
+    private float circumferenceMeters = 1.9277f;
     void Start()
     {
         rb = GetComponentInChildren<Rigidbody>();
@@ -35,9 +38,9 @@ public class CarControllerScript : MonoBehaviour
     {
         if (gameObject.CompareTag("Car"))
         {
-            this.jump = Convert.ToSingle(Input.GetButton("Jump"));           
-            this.vertical = Input.GetAxis("Vertical");
-            this.horizontal = Input.GetAxis("Horizontal");
+            jump = Convert.ToSingle(Input.GetButton("Jump"));           
+            vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxis("Horizontal");
             control();
         }
     }
@@ -87,7 +90,7 @@ public class CarControllerScript : MonoBehaviour
         WheelFLtrans.Rotate(WheelFL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         WheelFRtrans.Rotate(WheelFR.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         WheelRLtrans.Rotate(WheelRL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
-        WheelRRtrans.Rotate(WheelRL.rpm / 60 * 360 * Time.deltaTime, 0, 0);
+        WheelRRtrans.Rotate(WheelRR.rpm / 60 * 360 * Time.deltaTime, 0, 0);
         //changing tyre direction
         Vector3 temp = WheelFLtrans.localEulerAngles;
         Vector3 temp1 = WheelFRtrans.localEulerAngles;
@@ -101,5 +104,33 @@ public class CarControllerScript : MonoBehaviour
     public void SetControllable(bool controllable)
     {
         this.controllable = controllable;
+    }
+
+    public int GetEngineRPM()
+    {
+        float WheelRPM = transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z / 60 * 1000 / circumferenceMeters;
+        int gear = 0;
+
+        if (WheelRPM < 0)
+            gear = 0;
+        else
+        {
+            for (int i = 1; i < gearRatios.Count(); i++)
+            {
+                if (WheelRPM * gearRatios[i] * diffRatio < shiftRPM || i == gearRatios.Count() - 1)
+                {
+                    gear = i;
+                    break;
+                }
+            }
+        }
+
+        int engineRPM = Math.Abs(Convert.ToInt32(WheelRPM * gearRatios[gear] * diffRatio));
+        return engineRPM > idleRPM ? engineRPM : UnityEngine.Random.Range(idleRPM, idleRPM+30);
+    }
+
+    public int getSpeed()
+    {
+        return Math.Abs(Convert.ToInt32(transform.InverseTransformDirection(GetComponent<Rigidbody>().velocity).z));
     }
 }

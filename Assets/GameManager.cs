@@ -35,16 +35,17 @@ public class GameManager : MonoBehaviour
         Application.logMessageReceived += ApplicationOnlogMessageReceived;
         DontDestroyOnLoad(gameObject);
 
-        if (ReplayLogPath.Length > 0) InitReplay();
+        InitReplayIfGhostfileGiven();
         
         if (StartAiStream) DoStartAiStream();
         _audioSource = GetComponent<AudioSource>();
 
         if (!MuteBackgroundMusic) SetRandomBackgroundMusic();
-        if (countdown) StartCountdown();
-        
+
         SetOpponentCount();
         SpawnCars();
+        
+        if (countdown) StartCountdown();
     }
 
     private void ApplicationOnlogMessageReceived(string condition, string stacktrace, LogType type)
@@ -95,8 +96,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void InitReplay()
+    private void InitReplayIfGhostfileGiven()
     {
+        string ghostfile = PlayerPrefs.GetString("ghostfile");
+        if (ghostfile.Length > 0) ReplayLogPath = ghostfile;
+        if (ReplayLogPath.Length <= 0) return;
+        
         try
         {
             // Instantiate ghost
@@ -105,7 +110,7 @@ public class GameManager : MonoBehaviour
             using (StreamReader sr = new StreamReader(ReplayLogPath))
                 _replayService.InitReplay(sr.ReadToEnd(), _replayStates, _replayStateTimes);
         }
-        catch (IOException e)
+        catch (IOException)
         {
             Debug.Log("The file could not be read. Replay is not available");
         }

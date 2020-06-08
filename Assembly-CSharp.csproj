@@ -86,7 +86,7 @@
     <Compile Include="Assets\Lib\Services\StreamService.cs" />
     <Compile Include="Assets\MainMenu\Scripts\ExitOnClickScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\HighscoresPanelScript.cs" />
-    <Compile Include="Assets\MainMenu\Scripts\LoadSceneOnClickScript.cs" />
+    <Compile Include="Assets\MainMenu\Scripts\PlayMenuScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\SaveOpponentCountScript.cs" />
     <Compile Include="Assets\MainMenu\Scripts\SavePlayerNameScript.cs" />
     <Reference Include="Unity.Timeline.Editor">

@@ -16,6 +16,8 @@ TagManager:
   - SpawnPoint
   - Surface
   - CarAICollider
+  - TxtHighscore
+  - Grass
   layers:
   - Default
   - TransparentFX
