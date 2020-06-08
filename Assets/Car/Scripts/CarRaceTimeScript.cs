@@ -7,8 +7,10 @@ using System.Text.RegularExpressions;
 public class CarRaceTimeScript : MonoBehaviour
 {
     private int totalCheckpointCount;
+    private int checkpointCount = 0;
     private int laps = 1;
     private List<DateTime> checkpointTimes = new List<DateTime>();
+    private List<float> totalCheckpointTimes = new List<float>();
     private List<List<DateTime>> lapTimes = new List<List<DateTime>>();
     public int circuitNumber;
 
@@ -30,6 +32,20 @@ public class CarRaceTimeScript : MonoBehaviour
     public int GetCheckpointsHit()
     {
         return checkpointTimes.Count;
+    }
+    public List<float> GetCheckpointTimes()
+    {
+        float checkpointTime = Math.Abs(GetCurrentLapTime());
+        if (GetCheckpointsHit() > checkpointCount)
+        {
+            checkpointCount = GetCheckpointsHit();
+            totalCheckpointTimes.Add(checkpointTime);
+            if (totalCheckpointTimes.Count > 5)
+            {
+                totalCheckpointTimes.RemoveAt(0);
+            }
+        }
+        return totalCheckpointTimes;
     }
 
     public bool GetCompletedLap()
