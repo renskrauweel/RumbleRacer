@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Lib;
@@ -13,6 +12,11 @@ public class PlayMenuScript : MonoBehaviour
     public RectTransform ParentPanel;
     public Dropdown DropdownGhosts;
     public Toggle ToggleCreateGhost;
+    private List<string> Scenes = new List<string> // Set scene names here because EditorBuildSettings.scenes not available at build
+    {
+        "Oval",
+        "Go-Kart"
+    };
     
     void Start()
     {
@@ -26,17 +30,7 @@ public class PlayMenuScript : MonoBehaviour
 
     private string[] GetScenes()
     {
-        var dir = Environment.CurrentDirectory + "\\Assets\\Scenes";
-        var excludes = new List<string>
-        {
-            "MainMenu",
-            "AITraining"
-        };
-
-        return Directory.GetFiles(dir, "*.unity").Select(Path.GetFileName).ToArray()
-            .Select(scene => scene.Split('.')[0])
-            .Where(newScene => !excludes.Contains(newScene))
-            .ToArray();
+        return Scenes.ToArray();
     }
 
     private void PrintScenes(string[] scenes)
