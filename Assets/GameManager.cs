@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     {
         // Register exception log callback
         Application.logMessageReceived += ApplicationOnlogMessageReceived;
-        DontDestroyOnLoad(gameObject);
 
         InitReplayIfGhostfileGiven();
         

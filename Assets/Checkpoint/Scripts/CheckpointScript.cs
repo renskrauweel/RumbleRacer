@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using System.IO;
 using UnityEngine;
-using System.Text.RegularExpressions;
-using System;
+using UnityEngine.SceneManagement;
 
 public class CheckpointScript : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class CheckpointScript : MonoBehaviour
         highscoreFileDestination = Application.persistentDataPath + "/highscores.dat";
         playername = PlayerPrefs.GetString("playername");
         currentcircuit = PlayerPrefs.GetString("currentcircuit");
-        if (order != 0) setActiveMaterial(false);     
+        if (order != 0) setActiveMaterial(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,6 +32,7 @@ public class CheckpointScript : MonoBehaviour
             if (carRaceTimeScript.GetCompletedRace() && other.CompareTag("Player")) {
                 SaveHighscore(carRaceTimeScript.GetTotalRaceTime());
                 Debug.LogWarning("Finished the race in " + carRaceTimeScript.GetTotalRaceTime() + " Seconds!");
+                SceneManager.LoadScene("Scenes/MainMenu");
             }
         }
         if (carRaceTimeScript.GetCheckpointsHit() == order)
