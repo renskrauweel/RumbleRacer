@@ -76,4 +76,15 @@ public class CarRaceTimeScript : MonoBehaviour
         checkpointTimes = new List<DateTime>();
         lapTimes = new List<List<DateTime>>();       
     }
+
+    public int GetPosition()
+    {
+        List<(GameObject, (int,float))> carCheckpointHitAndTime = new List<(GameObject, (int, float))>();
+        carCheckpointHitAndTime.Add((gameObject,(gameObject.GetComponent<CarRaceTimeScript>().GetCheckpointsHit(), gameObject.GetComponent<CarRaceTimeScript>().GetCurrentLapTime())));
+        foreach (var aiCar in GameObject.FindGameObjectsWithTag("CarAI"))
+        {
+            carCheckpointHitAndTime.Add((aiCar, (aiCar.GetComponent<CarRaceTimeScript>().GetCheckpointsHit(), aiCar.GetComponent<CarRaceTimeScript>().GetCurrentLapTime())));
+        }
+        return carCheckpointHitAndTime.OrderBy(item => item.Item2.Item1).ThenBy(item => item.Item2.Item2).Reverse().ToList().IndexOf(carCheckpointHitAndTime.Where(item => item.Item1 == gameObject).First()) + 1;
+    }
 }

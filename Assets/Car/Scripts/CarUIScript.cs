@@ -15,7 +15,6 @@ public class CarUIScript : MonoBehaviour
 
     private int checkpointCount = 0;
     private List<float> checkpointTimes = new List<float>();
-    private List<int> averageRPM = new List<int>();
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +32,7 @@ public class CarUIScript : MonoBehaviour
         UIManager.DrawText(speedGuid, getSpeed().ToString() + " km/h", 24, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.045f));
         UIManager.DrawText(checkpointTimesGuid, GetCheckpointTimes(), 24, new Color(0/255f, 145/255f, 234/255f), TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.04f));
         UIManager.DrawText(lapTimeGuid, GetLapTimes(), 30, new Color(76/255f, 175/255f, 80/255f), TextAnchor.UpperRight);
-        UIManager.DrawText(positionGuid, GetPosition(), 32, Color.red, TextAnchor.LowerLeft);
+        UIManager.DrawText(positionGuid, "#" + GetComponent<CarRaceTimeScript>().GetPosition().ToString(), 32, Color.red, TextAnchor.LowerLeft);
         UIManager.DrawText(rpmGuid, getRPM().ToString() + " RPM", 18, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight);
     }
 
@@ -68,10 +67,5 @@ public class CarUIScript : MonoBehaviour
     int getRPM()
     {
         return GetComponent<CarControllerScript>().GetEngineRPM();
-    }
-
-    string GetPosition()
-    {
-        return "#1";
     }
 }
