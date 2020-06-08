@@ -15,6 +15,7 @@ public class CarUIScript : MonoBehaviour
 
     private List<float> checkpointTimes = new List<float>();
     private List<int> averageRPM = new List<int>();
+    private int checkpointCount;
 
     // Start is called before the first frame update
     void Start()
@@ -29,23 +30,31 @@ public class CarUIScript : MonoBehaviour
 
     void Update()
     {
-
-
         UIManager.DrawText(speedGuid, getSpeed().ToString() + " km/h", 24, Color.white, TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.045f));
-        UIManager.DrawText(checkpointTimesGuid, getCheckpointTimes(), 24, Color.white, TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.035f));
+        UIManager.DrawText(checkpointTimesGuid, getCurrentCheckpointTime(), 24, Color.white, TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.035f));
         UIManager.DrawText(lapTimeGuid, GetLapTimes(), 30, Color.white, TextAnchor.UpperRight, new Vector2(0, 0));
         UIManager.DrawText(positionGuid, GetPosition(), 32, Color.yellow, TextAnchor.UpperLeft, new Vector2(Screen.width * 0.002f, -Screen.height * 0.02f));
         UIManager.DrawText(rpmGuid, getRPM().ToString() + " RPM", 18, Color.white, TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.02f));
     }
 
-    string getCheckpointTimes()
+    string getCurrentCheckpointTime()
     {
         string output = "";
-        var checkpointTimes = GetComponent<CarRaceTimeScript>().GetCheckpointTimes();
+        float checkpointTime = Math.Abs(GetComponent<CarRaceTimeScript>().GetCurrentLapTime());
+        if (GetComponent<CarRaceTimeScript>().GetCheckpointsHit() > checkpointCount)
+        {
+            checkpointCount = GetComponent<CarRaceTimeScript>().GetCheckpointsHit();
+            checkpointTimes.Add(checkpointTime);
+            if (checkpointTimes.Count > 5)
+            {
+                checkpointTimes.RemoveAt(0);
+            }
+        }
         checkpointTimes.Reverse();
         checkpointTimes.ForEach(time => output += time.ToString("0.000") + Environment.NewLine);
         checkpointTimes.Reverse();
         return output;
+
     }
 
     string GetLapTimes()
