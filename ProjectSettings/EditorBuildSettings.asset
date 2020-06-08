@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Oval.unity
     guid: 342ba73235bcd1b40be9b68d654f74e6
+  - enabled: 1
+    path: Assets/Scenes/Suzuka.unity
+    guid: e0f10a6e263902a48b26873c69139350
   m_configObjects: {}
