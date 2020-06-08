@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public AudioClip BackgroundMusic1;
     public AudioClip BackgroundMusic2;
     public AudioClip BackgroundMusic3;
-    private LoggingService _loggingService = new LoggingService();
+    private LoggingService _loggingService;
     private List<ReplayState> _replayStates = new List<ReplayState>();
     private List<float> _replayStateTimes = new List<float>();
     private ReplayService _replayService = new ReplayService();
@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _loggingService = new LoggingService();
+        
         // Register exception log callback
         Application.logMessageReceived += ApplicationOnlogMessageReceived;
 
