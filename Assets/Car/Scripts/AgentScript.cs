@@ -20,7 +20,8 @@ public class AgentScript : Unity.MLAgents.Agent
     private float fastestTime = float.MaxValue;
     private Vector3 startPos;
     private quaternion startRot;
-    private bool isStarted;
+    private bool isStarted = false;
+    private float closestDistanceToNextCheckpoint = float.MaxValue;
 
     void Start()
     {
@@ -37,25 +38,27 @@ public class AgentScript : Unity.MLAgents.Agent
     public override void OnEpisodeBegin()
     {
         if (!isStarted) Start();
-        
-        startPos = transform.position;
-        startRot = transform.rotation;
+        GameObject.FindGameObjectsWithTag("CarAI").Where(x => x.GetComponent<AgentScript>().circuitNumber == this.circuitNumber).ToList().ForEach(y => y.GetComponent<AgentScript>().ResetAI());        
+    }
+
+    private void ResetAI()
+    {
         transform.position = startPos;
         transform.rotation = startRot;
         rBody.velocity = Vector3.zero;
         rBody.angularVelocity = Vector3.zero;
 
         checkpoints.ForEach(x => x.SetActive(true));
-        GetComponent<CarRaceTimeScript>().resetScript();
-        
+        gameObject.GetComponent<CarRaceTimeScript>().resetScript();
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Target and Agent positions
-        foreach(var ray in GetComponent<RayCasterScript>().getListOfHitsDistance())
+        // Objects and their distance
+        foreach(var ObjectAndDistance in GetComponent<RayCasterScript>().getListOfHitsObjectAndDistance())
         {
-            sensor.AddObservation(ray / 300);
+            sensor.AddObservation(ObjectAndDistance.Item1);
+            sensor.AddObservation(ObjectAndDistance.Item2 / 300);
         }
         
         // Agent velocity
@@ -65,13 +68,23 @@ public class AgentScript : Unity.MLAgents.Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        AddReward(-0.002f);
+        AddReward(-0.001f);
 
         float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5);
-
-        if (speed > 0.525)
+        GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
+        if(activeCheckpoint != null)
         {
-            AddReward(speed / 500);
+            float distanceToNextCheckpoint = Vector3.Distance(activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position), transform.position);
+            if (speed > 0.525 && distanceToNextCheckpoint < closestDistanceToNextCheckpoint)
+            {
+                AddReward(speed / 500);
+                closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
+
+                if (closestDistanceToNextCheckpoint < 6f)
+                {
+                    closestDistanceToNextCheckpoint = float.MaxValue;
+                }
+            }
         }
 
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
@@ -82,7 +95,7 @@ public class AgentScript : Unity.MLAgents.Agent
             lastCheckpointsHit = GetComponent<CarRaceTimeScript>().GetCheckpointsHit();
         }
 
-        if(collision != null && collision.gameObject.tag == "Barrier")
+        if(collision != null && (collision.gameObject.tag == "Barrier" || collision.gameObject.tag == "CarAI"))
         {
             AddReward(-0.01f);
         }

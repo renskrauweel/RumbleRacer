@@ -15,6 +15,7 @@ TagManager:
   - Circuit
   - SpawnPoint
   - Surface
+  - CarAICollider
   - TxtHighscore
   - Grass
   layers:

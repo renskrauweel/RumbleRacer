@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class RayCasterScript : MonoBehaviour
 {
@@ -83,6 +83,23 @@ public class RayCasterScript : MonoBehaviour
         }
 
         return hits;
+    }
+
+    //gets: object + distance > adds it to list of tuples
+    //0 = object >>> 0 = other(Barrier) - 1 = car
+    //1 = distance
+    public List<(int, float)> getListOfHitsObjectAndDistance()
+    {
+        List<(int, float)> ObjectsAndDistance = new List<(int, float)>();
+        foreach (var ray in getListOfRays())
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, timeoutDistance))
+                ObjectsAndDistance.Add(((hit.collider.gameObject.tag == "CarAICollider") ? 1 : 0, hit.distance));
+            else
+                ObjectsAndDistance.Add((0, timeoutDistance));
+        }
+        return ObjectsAndDistance;
     }
 
     private string getDebugMessageDistance()
