@@ -26,7 +26,12 @@ public class CountdownScript : MonoBehaviour
             GetComponent<CarControllerScript>().SetControllable(false);
             timer -= Time.deltaTime;
             if(gameObject.CompareTag("Car"))
-                UIManager.DrawText(textGuid, Mathf.Ceil(timer).ToString(), 48, new UnityEngine.Color(245f / 255f, 147f / 255f, 66f / 255f), TextAnchor.MiddleCenter);
+                if(Mathf.Ceil(timer) > 2)
+                    UIManager.DrawText(textGuid, Mathf.Ceil(timer).ToString(), 48, new UnityEngine.Color(200/255f, 40/255f, 0/255f), TextAnchor.LowerLeft, new Vector2(Screen.width / 2, Screen.height / 2));       
+                else if(Mathf.Ceil(timer) > 1)
+                    UIManager.DrawText(textGuid, Mathf.Ceil(timer).ToString(), 48, new UnityEngine.Color(215 / 255f, 90/ 255f, 0 / 255f), TextAnchor.LowerLeft, new Vector2(Screen.width / 2, Screen.height / 2));
+                else if (Mathf.Ceil(timer) > 0)
+                    UIManager.DrawText(textGuid, Mathf.Ceil(timer).ToString(), 48, new UnityEngine.Color(100 / 255f, 175 / 255f, 0 / 255f), TextAnchor.LowerLeft, new Vector2(Screen.width / 2, Screen.height / 2));
 
             if (timer < 0)
             {

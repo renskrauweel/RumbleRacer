@@ -13,9 +13,9 @@ public class CarUIScript : MonoBehaviour
     private Guid checkpointTimesGuid;
     private Guid speedGuid;
 
-    private int checkpointCount = 0;
     private List<float> checkpointTimes = new List<float>();
     private List<int> averageRPM = new List<int>();
+    private int checkpointCount;
 
     // Start is called before the first frame update
     void Start()
@@ -30,18 +30,14 @@ public class CarUIScript : MonoBehaviour
 
     void Update()
     {
-        UIManager.DrawText(speedGuid, getSpeed().ToString() + " km/h", 24, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.045f));
-        UIManager.DrawText(checkpointTimesGuid, GetCheckpointTimes(), 24, new Color(0/255f, 145/255f, 234/255f), TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.04f));
-        UIManager.DrawText(lapTimeGuid, GetLapTimes(), 30, new Color(76/255f, 175/255f, 80/255f), TextAnchor.UpperRight);
-        UIManager.DrawText(positionGuid, GetPosition(), 32, Color.red, TextAnchor.LowerLeft);
-        UIManager.DrawText(rpmGuid, getRPM().ToString() + " RPM", 18, new Color(0 / 255f, 145 / 255f, 234 / 255f), TextAnchor.LowerRight);
+        UIManager.DrawText(speedGuid, getSpeed().ToString() + " km/h", 24, Color.white, TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.045f));
+        UIManager.DrawText(checkpointTimesGuid, getCurrentCheckpointTime(), 24, Color.white, TextAnchor.UpperRight, new Vector2(0, -Screen.height* 0.035f));
+        UIManager.DrawText(lapTimeGuid, GetLapTimes(), 30, Color.white, TextAnchor.UpperRight, new Vector2(0, 0));
+        UIManager.DrawText(positionGuid, GetPosition(), 32, Color.yellow, TextAnchor.UpperLeft, new Vector2(Screen.width * 0.002f, -Screen.height * 0.02f));
+        UIManager.DrawText(rpmGuid, getRPM().ToString() + " RPM", 18, Color.white, TextAnchor.LowerRight, new Vector2(0, Screen.height * 0.02f));
     }
 
-    string GetLapTimes()
-    {
-        return GetComponent<CarRaceTimeScript>().GetLastLapTime() > 0 ? (GetComponent<CarRaceTimeScript>().GetLastLapTime()).ToString("0.000") : "";
-    }
-    string GetCheckpointTimes()
+    string getCurrentCheckpointTime()
     {
         string output = "";
         float checkpointTime = Math.Abs(GetComponent<CarRaceTimeScript>().GetCurrentLapTime());
@@ -54,10 +50,16 @@ public class CarUIScript : MonoBehaviour
                 checkpointTimes.RemoveAt(0);
             }
         }
-        checkpointTimes.Reverse();        
+        checkpointTimes.Reverse();
         checkpointTimes.ForEach(time => output += time.ToString("0.000") + Environment.NewLine);
         checkpointTimes.Reverse();
         return output;
+
+    }
+
+    string GetLapTimes()
+    {
+        return GetComponent<CarRaceTimeScript>().GetLastLapTime() > 0 ? (GetComponent<CarRaceTimeScript>().GetLastLapTime()).ToString("0.000") : "";
     }
 
     int getSpeed()
