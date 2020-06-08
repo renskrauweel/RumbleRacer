@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 16
+    VectorObservationSize: 30
     NumStackedVectorObservations: 1
     VectorActionSize: 03000000
     VectorActionDescriptions: []
@@ -772,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 8757278184026639506, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: CarAICollider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002aeb55c8b7b449bf8c1f5d08b90e3, type: 3}
