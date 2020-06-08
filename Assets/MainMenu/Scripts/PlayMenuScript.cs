@@ -15,7 +15,8 @@ public class PlayMenuScript : MonoBehaviour
     private List<string> Scenes = new List<string> // Set scene names here because EditorBuildSettings.scenes not available at build
     {
         "Oval",
-        "Go-Kart"
+        "Go-Kart",
+        "Suzuka"
     };
     
     void Start()

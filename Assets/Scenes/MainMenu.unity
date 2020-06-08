@@ -128,6 +128,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1235696738773369755, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235696738773369755, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.data[0].m_Text
+      value: Oval
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235696738773369755, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.data[1].m_Text
+      value: Go-Kart
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235696738773369755, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.data[2].m_Text
+      value: Suzuka
+      objectReference: {fileID: 0}
+    - target: {fileID: 1235696739023344691, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7505782523238513810, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505782524720733392, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddcf7279e1e1bf5478f44fda6a3ecf7c, type: 3}
