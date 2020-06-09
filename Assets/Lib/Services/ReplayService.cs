@@ -48,7 +48,7 @@ namespace Lib.Services
         {
             int index = _replayStateTimes
                 .Select((v, i) => new {Position = v, Index = i})
-                .OrderBy(p => Math.Abs(p.Position - (Time.time * 1000)))
+                .OrderBy(p => Math.Abs(p.Position - (Time.timeSinceLevelLoad)))
                 .First().Index;
 
             ReplayState res = _replayStates[index];
