@@ -62,3 +62,4 @@ crashlytics-build.properties
 .Logging/exceptionlogs/
 .Logging/replaylogs/
 Assembly-CSharp.csproj
+Assembly-CSharp.csproj
