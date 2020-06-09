@@ -95,7 +95,21 @@ public class RayCasterScript : MonoBehaviour
         {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, timeoutDistance))
-                ObjectsAndDistance.Add(((hit.collider.gameObject.tag == "CarAICollider") ? 1 : 0, hit.distance));
+            {
+                switch (hit.collider.gameObject.tag)
+                {
+                    case "CarAICollider":
+                        ObjectsAndDistance.Add((1, hit.distance));
+                        break;   
+                    case "Barrier":
+                        ObjectsAndDistance.Add((2, hit.distance));
+                        break;
+                    default:
+                        ObjectsAndDistance.Add((0, hit.distance));
+                        break;
+                }
+            }
+
             else
                 ObjectsAndDistance.Add((0, timeoutDistance));
         }
