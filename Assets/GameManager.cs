@@ -100,15 +100,14 @@ public class GameManager : MonoBehaviour
     private void InitReplayIfGhostfileGiven()
     {
         string ghostfile = PlayerPrefs.GetString("ghostfile");
-        if (ghostfile.Length > 0) ReplayLogPath = ghostfile;
-        if (ReplayLogPath.Length <= 0) return;
+        if (ghostfile.Length == 0 || ghostfile == "No ghost") return;
         
         try
         {
             // Instantiate ghost
             Ghost = Instantiate(Ghost, new Vector3(0, 0.5f, 0), Quaternion.identity);
             
-            using (StreamReader sr = new StreamReader(ReplayLogPath))
+            using (StreamReader sr = new StreamReader(ghostfile))
                 _replayService.InitReplay(sr.ReadToEnd(), _replayStates, _replayStateTimes);
         }
         catch (IOException)

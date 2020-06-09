@@ -61,7 +61,7 @@ public class CheckpointScript : MonoBehaviour
 
         using (StreamWriter sw = File.AppendText(highscoreFileDestination))
         {
-            sw.WriteLine(currentcircuit + "-" + playername + "-" + endTime + "Seconds");
+            sw.WriteLine(currentcircuit + ";" + playername + ";" + endTime);
         }
     }
 }
