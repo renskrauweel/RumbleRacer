@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8313721913910342024}
   - component: {fileID: 5493758623857341355}
   - component: {fileID: 7824488014790362581}
+  - component: {fileID: 7743722432129015828}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3081237619971079469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -15}
+  m_LocalPosition: {x: 0, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3115486112928885702}
@@ -193,6 +194,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7743722432129015828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3081237619971079469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96019f33e9ac1a24282236900713ac70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7273082330282484491}
+  distance: 15
+  height: 5
+  heightDamping: 2
+  lookAtHeight: 0
+  parentRigidbody: {fileID: 3115486112928885701}
+  rotationSnapTime: 0.1
+  distanceSnapTime: 0
+  distanceMultiplier: 0
 --- !u!1 &3115486110994223845
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,8 +602,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionClip: {fileID: 8300000, guid: fa7d6435e2dab5b489e4ec5ff04d230b, type: 3}
   CheckpointClip: {fileID: 8300000, guid: 050296e8891257847ae09ea84c9195bc, type: 3}
-  maxEnginePitch: 2.5
-  minEnginePitch: 1
 --- !u!82 &-51244009395659021
 AudioSource:
   m_ObjectHideFlags: 0

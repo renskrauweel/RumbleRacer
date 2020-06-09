@@ -18,6 +18,11 @@ public class CarRaceTimeScript : MonoBehaviour
         totalCheckpointCount = GameObject.FindGameObjectsWithTag("Checkpoint").ToList().Where(x => x.GetComponent<CheckpointScript>().circuitNumber == this.circuitNumber).ToList().Count;
     }
 
+    public List<List<DateTime>> GetLapTimes()
+    {
+        return lapTimes;
+    }
+
     public void AddCheckpointHit()
     {
         checkpointTimes.Add(DateTime.Now);
@@ -85,6 +90,6 @@ public class CarRaceTimeScript : MonoBehaviour
         {
             carCheckpointHitAndTime.Add((aiCar, (aiCar.GetComponent<CarRaceTimeScript>().GetCheckpointsHit(), aiCar.GetComponent<CarRaceTimeScript>().GetCurrentLapTime())));
         }
-        return carCheckpointHitAndTime.OrderBy(item => item.Item2.Item1).ThenBy(item => item.Item2.Item2).Reverse().ToList().IndexOf(carCheckpointHitAndTime.Where(item => item.Item1 == gameObject).First()) + 1;
+        return carCheckpointHitAndTime.OrderBy(item => item.Item1.GetComponent<CarRaceTimeScript>().GetLapTimes().Count()).ThenBy(item => item.Item2.Item1).ThenByDescending(item => item.Item2.Item2).Reverse().ToList().IndexOf(carCheckpointHitAndTime.Where(item => item.Item1 == gameObject).First()) + 1;
     }
 }

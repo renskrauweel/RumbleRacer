@@ -43,13 +43,11 @@ public class AgentScript : Unity.MLAgents.Agent
 
     private void ResetAI()
     {
+        gameObject.GetComponent<CarRaceTimeScript>().resetScript();
         transform.position = startPos;
         transform.rotation = startRot;
         rBody.velocity = Vector3.zero;
         rBody.angularVelocity = Vector3.zero;
-
-        checkpoints.ForEach(x => x.SetActive(true));
-        gameObject.GetComponent<CarRaceTimeScript>().resetScript();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -60,15 +58,16 @@ public class AgentScript : Unity.MLAgents.Agent
             sensor.AddObservation(ObjectAndDistance.Item1);
             sensor.AddObservation(ObjectAndDistance.Item2 / 300);
         }
-        
+
         // Agent velocity
-        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5));
-        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).x / 100) / 2 + 0.5));
+        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5));
+        sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).x / 160) / 2 + 0.5));
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {
         AddReward(-0.001f);
+        GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
 
         float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5);
         GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
@@ -87,8 +86,6 @@ public class AgentScript : Unity.MLAgents.Agent
             }
         }
 
-        GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
-
         if (lastCheckpointsHit < GetComponent<CarRaceTimeScript>().GetCheckpointsHit())
         {
             AddReward(0.5f);
@@ -105,7 +102,7 @@ public class AgentScript : Unity.MLAgents.Agent
             if(GetComponent<CarRaceTimeScript>().GetTotalRaceTime() < fastestTime)
             {
                 fastestTime = GetComponent<CarRaceTimeScript>().GetTotalRaceTime();
-                Debug.LogError("NEW FASTEST TIME: " + fastestTime);
+                //Debug.LogError("NEW FASTEST TIME: " + fastestTime);
             }
             AddReward(1f);
             EndEpisode();

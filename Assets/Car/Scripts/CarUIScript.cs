@@ -14,7 +14,7 @@ public class CarUIScript : MonoBehaviour
     private Guid speedGuid;
 
     private List<float> checkpointTimes = new List<float>();
-
+    private int checkpointCount = 0;
     // Start is called before the first frame update
     void Start()
     {
