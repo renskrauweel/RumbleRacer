@@ -71,6 +71,7 @@
     <Compile Include="Assets\Car\Scripts\CarControllerScript.cs" />
     <Compile Include="Assets\Car\Scripts\CarRaceTimeScript.cs" />
     <Compile Include="Assets\Car\Scripts\CarReplayLoggerScript.cs" />
+    <Compile Include="Assets\Car\Scripts\CarSmoothFollow.cs" />
     <Compile Include="Assets\Car\Scripts\CarSoundScript.cs" />
     <Compile Include="Assets\Car\Scripts\CarUIScript.cs" />
     <Compile Include="Assets\Car\Scripts\CountdownScript.cs" />

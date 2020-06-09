@@ -23,7 +23,7 @@ public class CarReplayLoggerScript : MonoBehaviour
         if (UseLogging)
         {
             var transform = _carControllerScript.transform;
-            _loggingService.LogCarReplay(_carReplayGuid, Time.time * 1000, transform.position, transform.rotation);
+            _loggingService.LogCarReplay(_carReplayGuid, Time.timeSinceLevelLoad, transform.position, transform.rotation);
         }
     }
 }
