@@ -29,10 +29,10 @@ public class HighscoresPanelScript : MonoBehaviour
             string data = sr.ReadToEnd();
             foreach (string dataRow in data.Split(new string[] { "\r\n" }, StringSplitOptions.None))
             {
-                string[] dataSplitted = dataRow.Split('-');
+                string[] dataSplitted = dataRow.Split(';');
                 if(dataSplitted.Length == 3) _highscores.Add(new Highscore(dataSplitted[0], 
-                    dataSplitted[1], Math.Round(double.Parse(dataSplitted[2]
-                        .Replace("Seconds", "")), 3, MidpointRounding.ToEven)));
+                    dataSplitted[1], 
+                    Math.Round(double.Parse(dataSplitted[2]), 3)));
             }
         }
     }
