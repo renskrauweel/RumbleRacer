@@ -38,7 +38,7 @@ public class AgentScript : Unity.MLAgents.Agent
     public override void OnEpisodeBegin()
     {
         if (!isStarted) Start();
-        GameObject.FindGameObjectsWithTag("CarAI").Where(x => x.GetComponent<AgentScript>().circuitNumber == this.circuitNumber).ToList().ForEach(y => y.GetComponent<AgentScript>().ResetAI());        
+        ResetAI();        
     }
 
     private void ResetAI()
@@ -53,20 +53,20 @@ public class AgentScript : Unity.MLAgents.Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Objects and their distance
-        foreach(var ObjectAndDistance in GetComponent<RayCasterScript>().getListOfHitsObjectAndDistance())
+        foreach(var Distance in GetComponent<RayCasterScript>().getListOfHitsDistance())
         {
-            sensor.AddObservation(ObjectAndDistance.Item1);
-            sensor.AddObservation(ObjectAndDistance.Item2 / 300);
+            sensor.AddObservation(Distance / 500);
         }
 
         // Agent velocity
         sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5));
         sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).x / 160) / 2 + 0.5));
+        sensor.AddObservation(Convert.ToSingle(transform.rotation.y / 360));
     }
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        AddReward(-0.001f);
+        AddReward(-0.002f);
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
 
         float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5);
@@ -88,13 +88,17 @@ public class AgentScript : Unity.MLAgents.Agent
 
         if (lastCheckpointsHit < GetComponent<CarRaceTimeScript>().GetCheckpointsHit())
         {
-            AddReward(0.5f);
+            AddReward(0.75f);
             lastCheckpointsHit = GetComponent<CarRaceTimeScript>().GetCheckpointsHit();
         }
 
-        if(collision != null && (collision.gameObject.tag == "Barrier" || collision.gameObject.tag == "CarAI"))
+        if(collision != null && collision.gameObject.tag == "Barrier")
         {
             AddReward(-0.01f);
+        }     
+        if(collision != null && collision.gameObject.tag == "CarAI")
+        {
+            AddReward(-0.005f);
         }
 
         if (GetComponent<CarRaceTimeScript>().GetCompletedRace())

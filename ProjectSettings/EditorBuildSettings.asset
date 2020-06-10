@@ -5,16 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: f12ce15a936af474eaf261841a8149aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Go-Kart.unity
     guid: aba323eaa6bcd5f47abdc18e0603aeb0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Oval.unity
     guid: 342ba73235bcd1b40be9b68d654f74e6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Suzuka.unity
     guid: e0f10a6e263902a48b26873c69139350
+  - enabled: 1
+    path: Assets/Scenes/AITraining.unity
+    guid: 46f1de3006a58e24abb8b4a6067cd1b4
   m_configObjects: {}

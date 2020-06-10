@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736895ec589659c4ebee84c64ce42550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeoutDistance: 300
+  timeoutDistance: 500
   ShowRays: 0
   LogDistance: 0
 --- !u!114 &7357513512157126519
@@ -264,13 +264,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 30
+    VectorObservationSize: 17
     NumStackedVectorObservations: 1
     VectorActionSize: 03000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 5022602860645237092, guid: 5b25f83a8cabf2d4d926d822384378ca, type: 3}
-  m_InferenceDevice: 0
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: Car
   TeamId: 0
