@@ -48,6 +48,7 @@ public class AgentScript : Unity.MLAgents.Agent
         transform.rotation = startRot;
         rBody.velocity = Vector3.zero;
         rBody.angularVelocity = Vector3.zero;
+        lastCheckpointsHit = 0;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -66,10 +67,12 @@ public class AgentScript : Unity.MLAgents.Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
+        Debug.LogWarning(GetCumulativeReward());
         AddReward(-0.002f);
+
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
 
-        float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 100) / 2 + 0.5);
+        float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5);
         GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
         if(activeCheckpoint != null)
         {
@@ -78,7 +81,7 @@ public class AgentScript : Unity.MLAgents.Agent
             {
                 AddReward(speed / 500);
                 closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
-
+        
                 if (closestDistanceToNextCheckpoint < 6f)
                 {
                     closestDistanceToNextCheckpoint = float.MaxValue;
@@ -88,7 +91,7 @@ public class AgentScript : Unity.MLAgents.Agent
 
         if (lastCheckpointsHit < GetComponent<CarRaceTimeScript>().GetCheckpointsHit())
         {
-            AddReward(0.75f);
+            AddReward(0.25f);
             lastCheckpointsHit = GetComponent<CarRaceTimeScript>().GetCheckpointsHit();
         }
 
