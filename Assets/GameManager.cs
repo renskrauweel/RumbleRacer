@@ -5,6 +5,7 @@ using System.Linq;
 using Lib.Replay;
 using Lib.Services;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class GameManager : MonoBehaviour
@@ -58,6 +59,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (_replayStates.Count > 0) _replayService.UpdateReplayState(Ghost, _replayStates, _replayStateTimes);
+        
+        RegisterKeyPresses();
     }
 
     private void StartCountdown()
@@ -142,5 +145,11 @@ public class GameManager : MonoBehaviour
     private void SetOpponentCount()
     {
         OpponentCount = int.TryParse(PlayerPrefs.GetString("opponentcount"), out var number) ? number : 0;
+    }
+
+    private void RegisterKeyPresses()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("Scenes/MainMenu");
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(PlayerPrefs.GetString("currentcircuit"));
     }
 }
