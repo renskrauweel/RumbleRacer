@@ -72,22 +72,22 @@ public class AgentScript : Unity.MLAgents.Agent
 
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
 
-        float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5);
-        GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
-        if(activeCheckpoint != null)
-        {
-            float distanceToNextCheckpoint = Vector3.Distance(activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position), transform.position);
-            if (speed > 0.525 && distanceToNextCheckpoint < closestDistanceToNextCheckpoint)
-            {
-                AddReward(speed / 500);
-                closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
-        
-                if (closestDistanceToNextCheckpoint < 6f)
-                {
-                    closestDistanceToNextCheckpoint = float.MaxValue;
-                }
-            }
-        }
+        //float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5);
+        //GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
+        //if(activeCheckpoint != null)
+        //{
+        //    float distanceToNextCheckpoint = Vector3.Distance(activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position), transform.position);
+        //    if (speed > 0.525 && distanceToNextCheckpoint < closestDistanceToNextCheckpoint)
+        //    {
+        //        AddReward(speed / 750);
+        //        closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
+        //
+        //        if (closestDistanceToNextCheckpoint < 6f)
+        //        {
+        //            closestDistanceToNextCheckpoint = float.MaxValue;
+        //        }
+        //    }
+        //}
 
         if (lastCheckpointsHit < GetComponent<CarRaceTimeScript>().GetCheckpointsHit())
         {
