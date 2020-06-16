@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 9207668616216348010, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
         type: 3}
       propertyPath: laps
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9207668616216348010, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
         type: 3}
@@ -305,7 +305,7 @@ PrefabInstance:
     - target: {fileID: 9207668616216348010, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
         type: 3}
       propertyPath: OpponentCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9207668616216348010, guid: a7ab058e1a9c39f4b83efff9e208a9d4,
         type: 3}

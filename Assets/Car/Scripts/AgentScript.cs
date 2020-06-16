@@ -3,7 +3,6 @@ using UnityEngine;
 using Unity.MLAgents.Sensors;
 using System;
 using System.Linq;
-using System.Numerics;
 using Unity.Mathematics;
 using System.Text.RegularExpressions;
 using Vector3 = UnityEngine.Vector3;
@@ -59,35 +58,48 @@ public class AgentScript : Unity.MLAgents.Agent
             sensor.AddObservation(Distance / 500);
         }
 
+        sensor.AddObservation(GetAngleToClosestCheckpoint());
+
         // Agent velocity
         sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5));
         sensor.AddObservation(Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).x / 160) / 2 + 0.5));
         sensor.AddObservation(Convert.ToSingle(transform.rotation.y / 360));
     }
 
+    public float GetAngleToClosestCheckpoint()
+    {
+        GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
+        if (activeCheckpoint != null)
+        {
+            Vector3 targetDir = activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position) - transform.position;
+            float angle = Vector3.SignedAngle(targetDir, transform.forward, Vector3.up);
+            return angle / 180;
+        }
+        return 0;
+    }
+
     public override void OnActionReceived(float[] vectorAction)
     {
-        Debug.LogWarning(GetCumulativeReward());
-        AddReward(-0.002f);
+        AddReward(-0.005f);
 
         GetComponent<CarControllerScript>().AIController(vectorAction[0], vectorAction[1], vectorAction[2]);
 
-        //float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5);
-        //GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
-        //if(activeCheckpoint != null)
-        //{
-        //    float distanceToNextCheckpoint = Vector3.Distance(activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position), transform.position);
-        //    if (speed > 0.525 && distanceToNextCheckpoint < closestDistanceToNextCheckpoint)
-        //    {
-        //        AddReward(speed / 750);
-        //        closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
-        //
-        //        if (closestDistanceToNextCheckpoint < 6f)
-        //        {
-        //            closestDistanceToNextCheckpoint = float.MaxValue;
-        //        }
-        //    }
-        //}
+        float speed = Convert.ToSingle((transform.InverseTransformDirection(rBody.velocity).z / 160) / 2 + 0.5);
+        GameObject activeCheckpoint = checkpoints.Where(x => x.GetComponent<CheckpointScript>().order == GetComponent<CarRaceTimeScript>().GetCheckpointsHit()).FirstOrDefault();
+        if(activeCheckpoint != null)
+        {
+            float distanceToNextCheckpoint = Vector3.Distance(activeCheckpoint.GetComponent<Renderer>().bounds.ClosestPoint(transform.position), transform.position);
+            if (speed > 0.525 && distanceToNextCheckpoint < closestDistanceToNextCheckpoint)
+            {
+                AddReward(speed / 750);
+                closestDistanceToNextCheckpoint = distanceToNextCheckpoint;
+        
+                if (closestDistanceToNextCheckpoint < 6f)
+                {
+                    closestDistanceToNextCheckpoint = float.MaxValue;
+                }
+            }
+        }
 
         if (lastCheckpointsHit < GetComponent<CarRaceTimeScript>().GetCheckpointsHit())
         {
