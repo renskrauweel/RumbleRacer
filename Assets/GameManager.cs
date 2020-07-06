@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var guid = new Guid();
         _loggingService = new LoggingService();
         
         // Register exception log callback
