@@ -10,5 +10,8 @@ dist: xenial
 dotnet: 3.1
 script:
 - dotnet tool install --global dotnet-sonarscanner
-- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
-- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+#- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
+#- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+- dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer"
+- dotnet build RumbleRacer.sln
+- dotnet sonarscanner end
