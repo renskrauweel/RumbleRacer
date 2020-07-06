@@ -17,6 +17,7 @@ before_script:
   - wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.10.0.19059/sonar-scanner-msbuild-4.10.0.19059-net46.zip
   - sudo apt-get install unzip
   - unzip sonar-scanner-msbuild-4.10.0.19059-net46.zip
+  - ls
   
 
 script:
