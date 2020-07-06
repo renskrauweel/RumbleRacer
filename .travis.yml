@@ -8,7 +8,33 @@ language: csharp
 mono: none
 dist: xenial
 dotnet: 3.1
+
+install:
+  - dotnet tool install --global dotnet-sonarscanner
+
+before_script:
+  - export PATH="$PATH:$HOME/.dotnet/tools"
+  - wget https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.10.0.19059/sonar-scanner-msbuild-4.10.0.19059-netcoreapp3.0.zip
+  - sudo apt-get install unzip
+  - unzip sonar-scanner-msbuild-4.10.0.19059-netcoreapp3.0.zip
+  - ls
+  
+
 script:
-- dotnet tool install --global dotnet-sonarscanner
-- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
-- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+#- dotnet tool install --global dotnet-sonarscanner
+#- dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+#- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
+#- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+#- dotnet sonarscanner end
+  
+#  - dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+#  - dotnet msbuild RumbleRacer.sln
+#  - dotnet sonarscanner end
+
+#- SonarScanner.MSBuild.exe begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+#- MSBuild.exe RumbleRacer.sln /t:Rebuild
+#- SonarScanner.MSBuild.exe end
+
+- dotnet SonarScanner.MSBuild.dll begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+- dotnet build RumbleRacer.sln
+- dotnet SonarScanner.MSBuild.dll end
