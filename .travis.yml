@@ -20,5 +20,5 @@ script:
 #- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
 #- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
   - dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
-  - dotnet clean RumbleRacer.sln
+  - dotnet msbuild RumbleRacer.sln
   - dotnet sonarscanner end
