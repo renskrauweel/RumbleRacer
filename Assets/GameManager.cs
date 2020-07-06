@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         var guid = new Guid();
+        var guid2 = new Guid();
         _loggingService = new LoggingService();
         
         // Register exception log callback
