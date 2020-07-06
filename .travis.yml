@@ -17,13 +17,15 @@ before_script:
 
 script:
 #- dotnet tool install --global dotnet-sonarscanner
-#- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
-#- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+- dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+- build-wrapper-linux-x86-64 --out-dir bw-output dotnet clean RumbleRacer.sln
+- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
+- dotnet sonarscanner end
   
 #  - dotnet sonarscanner begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
 #  - dotnet msbuild RumbleRacer.sln
 #  - dotnet sonarscanner end
 
-- SonarScanner.MSBuild.exe begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
-- MSBuild.exe RumbleRacer.sln /t:Rebuild
-- SonarScanner.MSBuild.exe end
+#- SonarScanner.MSBuild.exe begin /k:"renskrauweel_RumbleRacer" /o:"renskrauweel"
+#- MSBuild.exe RumbleRacer.sln /t:Rebuild
+#- SonarScanner.MSBuild.exe end
